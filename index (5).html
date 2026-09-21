@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ułamki dziesiętne — zeszyt Marysi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eaf1fb;
+    --paper: #ffffff;
+    --grid-line: rgba(29,78,216,0.09);
+    --margin-line: rgba(214,69,69,0.32);
+    --ink: #1f2a37;
+    --muted: #5b6b80;
+    --blue: #1d4ed8;
+    --blue-soft: #e4ecfd;
+    --red: #d64545;
+    --red-soft: #fbe6e6;
+    --green: #2f9e44;
+    --green-soft: #e5f6e8;
+    --amber: #b45309;
+    --amber-soft: #fef1dc;
+    --star: #ec9a10;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(31,42,55,0.06), 0 6px 18px rgba(31,42,55,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10141d;
+      --paper: #1b2333;
+      --grid-line: rgba(147,197,253,0.09);
+      --margin-line: rgba(248,113,113,0.22);
+      --ink: #e7edf6;
+      --muted: #9aa8bc;
+      --blue: #7aa2f7;
+      --blue-soft: #24304a;
+      --red: #f28b82;
+      --red-soft: #3a2323;
+      --green: #7fd99a;
+      --green-soft: #1f3327;
+      --amber: #f0b429;
+      --amber-soft: #3a2f14;
+      --star: #ffce54;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 18px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10141d;
+    --paper: #1b2333;
+    --grid-line: rgba(147,197,253,0.09);
+    --margin-line: rgba(248,113,113,0.22);
+    --ink: #e7edf6;
+    --muted: #9aa8bc;
+    --blue: #7aa2f7;
+    --blue-soft: #24304a;
+    --red: #f28b82;
+    --red-soft: #3a2323;
+    --green: #7fd99a;
+    --green-soft: #1f3327;
+    --amber: #f0b429;
+    --amber-soft: #3a2f14;
+    --star: #ffce54;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 18px rgba(0,0,0,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    padding: 22px 14px 60px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  header.hero {
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px 26px 22px;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid var(--margin-line);
+  }
+  header.hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(var(--grid-line) 0 1px, transparent 1px 28px),
+                       repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  header.hero h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--blue);
+    position: relative;
+  }
+  header.hero p.sub {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    position: relative;
+    max-width: 46ch;
+  }
+  .overall-stars {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .chip {
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-radius: 999px;
+    padding: 6px 13px;
+    font-weight: 700;
+    font-size: 0.86rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  nav.tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 18px 0;
+  }
+  nav.tabs button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 12px 6px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: var(--paper);
+    color: var(--muted);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  nav.tabs button .stars { display:block; font-size: 0.72rem; margin-top: 3px; color: var(--star); letter-spacing: 1px;}
+  nav.tabs button:hover { transform: translateY(-1px); }
+  nav.tabs button.active { color: var(--blue); border-color: var(--blue); }
+  nav.tabs button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+  section.op { display: none; }
+  section.op.active { display: block; animation: fadein 0.25s ease; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(4px);} to { opacity:1; transform:none; } }
+
+  .card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 22px 24px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .card.teoria { border-left: 4px solid var(--blue); transition: box-shadow 0.4s ease; }
+  .card.teoria.pulse { animation: pulseBox 1.1s ease 2; }
+  @keyframes pulseBox {
+    0%,100% { box-shadow: var(--shadow); }
+    50% { box-shadow: 0 0 0 4px var(--blue-soft), var(--shadow); }
+  }
+  .card h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.9rem;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .card h3 {
+    font-size: 1rem;
+    text-transform: none;
+    color: var(--muted);
+    margin: 18px 0 8px;
+    font-weight: 800;
+  }
+  .rule-box {
+    background: var(--blue-soft);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.98rem;
+  }
+  .rule-box b { color: var(--blue); }
+
+  .example {
+    margin-top: 14px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .colgrid {
+    display: inline-grid;
+    grid-auto-rows: auto;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: repeating-linear-gradient(var(--grid-line) 0 1px, transparent 1px 34px),
+                repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 30px);
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .colgrid .row { display: contents; }
+  .colgrid .cell { width: 30px; height: 34px; display:flex; align-items:center; justify-content:center; }
+  .colgrid .comma { color: var(--red); }
+  .colgrid .op-sign { color: var(--muted); font-size: 1rem; }
+  .colgrid .line-row { border-top: 2px solid var(--ink); margin-top: 2px; grid-column: 1 / -1; }
+  .colgrid .result .cell { color: var(--green); }
+
+  .steps-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .steps-flow .box {
+    background: var(--blue-soft);
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .steps-flow .arrow { color: var(--muted); font-weight: 400; }
+  .steps-flow .final { background: var(--green-soft); color: var(--green); }
+
+  .audio-btn {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--paper);
+    border: 2px solid var(--blue);
+    color: var(--blue);
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+  .audio-btn:hover { background: var(--blue-soft); }
+  .audio-btn.speaking { background: var(--blue); color: var(--paper); }
+
+  /* quiz */
+  .quiz-progress {
+    font-size: 0.86rem;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .quiz-q { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; }
+  .quiz-options { display: grid; gap: 9px; }
+  .quiz-options button {
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--grid-line);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .quiz-options button:hover:not(:disabled) { border-color: var(--blue); }
+  .quiz-options button.correct { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+  .quiz-options button.wrong { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+  .quiz-options button:disabled { cursor: default; opacity: 0.85; }
+  .feedback { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-weight: 700; display:none; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--green-soft); color: var(--green); }
+  .feedback.bad { background: var(--red-soft); color: var(--red); }
+  .feedback .expl { display:block; font-weight: 500; margin-top: 6px; color: var(--ink); }
+  .back-link {
+    margin-top: 10px;
+    display: inline-block;
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-weight: 800;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+  }
+  .next-btn {
+    margin-top: 14px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+    display: none;
+  }
+  .next-btn.show { display: inline-block; }
+  .quiz-done { display:none; text-align:center; padding: 10px 0; }
+  .quiz-done.show { display:block; }
+  .quiz-done .big { font-size: 2rem; }
+  .retry-btn {
+    margin-top: 10px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  /* zadania */
+  .task { padding: 14px 0; border-top: 1px solid var(--grid-line); }
+  .task:first-of-type { border-top: none; padding-top: 0; }
+  .task-q { font-weight: 800; font-size: 1.06rem; margin-bottom: 10px; }
+  .task-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .task-row input {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 2px solid var(--grid-line);
+    width: 130px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .task-row input:focus { outline: none; border-color: var(--blue); }
+  .task-row button {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+  .task-result { margin-top: 8px; font-weight: 700; display:none; }
+  .task-result.show { display:block; }
+  .task-result.ok { color: var(--green); }
+  .task-result.bad { color: var(--red); }
+  .task.solved .task-q { color: var(--green); }
+  .task.solved .task-row input { border-color: var(--green); }
+
+  /* --- stepper (krok po kroku) --- */
+  .stepper-panel {
+    margin-top: 6px;
+    border: 2px dashed var(--blue);
+    border-radius: 12px;
+    padding: 18px 16px 16px;
+  }
+  .stepper-stage {
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0 14px;
+  }
+  .stepper-caption {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.96rem;
+    min-height: 44px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .stepper-controls { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .stepper-controls button {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+  }
+  .stepper-controls button:disabled { opacity: 0.3; cursor: default; }
+  .stepper-dots { display: flex; gap: 6px; }
+  .stepper-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--grid-line); display:inline-block; }
+  .stepper-dots span.active { background: var(--blue); }
+
+  /* borrow (pożyczanie) grid */
+  .borrow-grid2 {
+    display: inline-grid;
+    grid-template-columns: 24px 46px 16px 46px 46px;
+    row-gap: 2px;
+  }
+  .bcell { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-height: 42px; }
+  .bcell.head { min-height: 20px; font-size: 0.62rem; color: var(--muted); font-weight: 800; justify-content: flex-end; }
+  .bcell .val { font-size: 1.45rem; line-height: 1.15; font-weight: 800; color: var(--ink); }
+  .bcell .val.old { font-size: 0.8rem; text-decoration: line-through; color: var(--muted); font-weight: 700; line-height: 1; }
+  .bcell .val.new { color: var(--red); }
+  .bcell .val.result { color: var(--green); }
+  .bcell .val.empty { color: var(--grid-line); }
+  .bcell.active .val:last-child { background: var(--blue-soft); border-radius: 6px; padding: 0 5px; }
+  .borrow-grid2 .divider { grid-column: 1 / -1; border-top: 2px solid var(--ink); margin: 3px 0 4px; }
+
+  /* multiplication comma demo */
+  .eq-display { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-size: 1.4rem; font-weight: 800; }
+  .eq-display .op { font-size: 1.2rem; color: var(--muted); font-weight: 700; }
+  .eq-display .num-block { display: flex; flex-direction: column; align-items: center; }
+  .eq-display .num-block .hl { color: var(--red); }
+  .eq-display .num-block .tag { font-size: 0.62rem; color: var(--muted); font-weight: 700; margin-top: 3px; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; font-weight: 800; }
+  .frac .line { width: 100%; border-top: 2px solid var(--ink); margin: 2px 0; }
+  .eq-display .final { color: var(--green); }
+
+  /* częsty błąd */
+  .mistake-box {
+    margin-top: 16px;
+    background: var(--amber-soft);
+    border-left: 4px solid var(--amber);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .mistake-box h4 { margin: 0 0 8px; font-size: 0.98rem; color: var(--amber); font-weight: 800; }
+  .mistake-box p { margin: 8px 0 0; font-size: 0.92rem; }
+  .compare-row { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .compare-box {
+    flex: 1 1 140px;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+  .compare-box.wrong { border: 2px solid var(--red); color: var(--red); background: var(--red-soft); }
+  .compare-box.right { border: 2px solid var(--green); color: var(--green); background: var(--green-soft); }
+  .compare-box .tag { display: block; font-size: 0.68rem; font-weight: 800; margin-bottom: 4px; }
+  .compare-box .zero-hl { text-decoration: underline; text-decoration-thickness: 2px; }
+
+  /* wielu składników */
+  .multi-note { font-size: 0.92rem; color: var(--muted); margin: 6px 0 0; }
+
+  /* pobieranie kart pracy (email gate) */
+  .download-card { border-left: 4px solid var(--green); }
+  .download-card p.lead { color: var(--muted); font-size: 0.94rem; margin: 0 0 14px; }
+  .email-gate-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .email-gate-form input[type="email"] {
+    flex: 1 1 200px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid var(--grid-line);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .email-gate-form input[type="email"]:focus { outline: none; border-color: var(--green); }
+  .email-gate-form button {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+  .email-gate-note { font-size: 0.76rem; color: var(--muted); margin-top: 8px; }
+  .download-ready { display: none; text-align: center; padding: 6px 0; }
+  .download-ready.show { display: block; }
+  .download-ready a.dl-link {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 11px 22px;
+    border-radius: 999px;
+    margin-top: 6px;
+  }
+  .download-ready .thanks { font-weight: 700; color: var(--green); margin-bottom: 4px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 24px;
+  }
+  footer button {
+    background: none;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 480px) {
+    header.hero h1 { font-size: 2.1rem; }
+    .colgrid { font-size: 1.05rem; }
+    nav.tabs { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<!-- Statyczny formularz, żeby Netlify wykrył go podczas budowania strony. Prawdziwe formularze renderuje JS niżej i wysyła pod tę samą nazwę. -->
+<form name="karty-pracy" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field">
+  <input type="email" name="email">
+  <input type="text" name="sekcja">
+</form>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Ułamki dziesiętne ✏️</h1>
+    <p class="sub">Dodawanie, odejmowanie, mnożenie i dzielenie — teoria, quizy i zadania dla Marysi.</p>
+    <div class="overall-stars" id="overallStars"></div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div id="sections"></div>
+
+  <footer>
+    Powodzenia, Marysiu! Jeśli coś się nie uda za pierwszym razem — to normalne, wracaj do teorii i spróbuj jeszcze raz.
+    <br>
+    <button id="resetBtn" type="button">Wyczyść postępy</button>
+  </footer>
+</div>
+
+<script>
+(function(){
+
+  // ---------- POMOCNICZE DO WIZUALIZACJI "POŻYCZANIA" ----------
+  function bc(main, opts){
+    opts = opts || {};
+    var cls = "val " + (opts.cls || "plain");
+    var oldHtml = opts.old ? ('<span class="val old">' + opts.old + '</span>') : "";
+    return '<div class="bcell' + (opts.active ? ' active' : '') + '">' + oldHtml + '<span class="' + cls + '">' + main + '</span></div>';
+  }
+  function brow(signTxt, jHtml, dHtml, sHtml){
+    var signCell = '<div class="bcell"><span class="val plain">' + (signTxt || "") + '</span></div>';
+    var commaCell = '<div class="bcell"><span class="val plain">,</span></div>';
+    return signCell + jHtml + commaCell + dHtml + sHtml;
+  }
+  var BORROW_HEAD =
+    '<div class="bcell head">&nbsp;</div><div class="bcell head">jedn.</div>' +
+    '<div class="bcell head">&nbsp;</div><div class="bcell head">dzies.</div><div class="bcell head">setne</div>';
+  function borrowStage(rows){
+    return '<div class="borrow-grid2">' + BORROW_HEAD + rows + '</div>';
+  }
+
+  // Generyczne wersje (dowolna liczba kolumn) — do przykładów z kaskadą pożyczek przez zera
+  function browN(signTxt, cells){
+    var signCell = '<div class="bcell"><span class="val plain">' + (signTxt || "") + '</span></div>';
+    var commaCell = '<div class="bcell"><span class="val plain">,</span></div>';
+    var out = signCell;
+    for (var i = 0; i < cells.length; i++) {
+      out += cells[i] === ",," ? commaCell : cells[i];
+    }
+    return out;
+  }
+  function borrowStageN(headLabels, colTemplate, rows){
+    var headHtml = '<div class="bcell head">&nbsp;</div>';
+    headLabels.forEach(function(h){
+      headHtml += (h === ",,") ? '<div class="bcell head">&nbsp;</div>' : ('<div class="bcell head">' + h + '</div>');
+    });
+    return '<div class="borrow-grid2" style="grid-template-columns:' + colTemplate + ';">' + headHtml + rows + '</div>';
+  }
+
+  var BORROW_DEMO = [
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("2"), bc("0", {active:true})) +
+        brow("−", bc("3"), bc("4"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Zaczynamy od ostatniej kolumny — setnych: 0 − 5. Nie da się, bo 0 jest mniejsze niż 5. Trzeba pożyczyć z sąsiedniej kolumny (dziesiątych)."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("1", {old:"2", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"})) +
+        brow("−", bc("3"), bc("4"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Pożyczamy 1 z dziesiątych: 2 zamienia się w 1, a setne dostają dodatkową „dziesiątkę” — zamiast 0 mamy teraz 10."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("1"), bc("10", {active:true})) +
+        brow("−", bc("3"), bc("4"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("5", {cls:"result", active:true}))
+      ),
+      caption: "Teraz można odjąć: 10 − 5 = 5. To są nasze setne w wyniku."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("1", {active:true}), bc("10")) +
+        brow("−", bc("3"), bc("4", {active:true}), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Teraz kolumna dziesiątych: 1 − 4. Znowu za mało — pożyczamy z jedności."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("6", {old:"7", active:true, cls:"new"}), bc("11", {old:"1", active:true, cls:"new"}), bc("10")) +
+        brow("−", bc("3"), bc("4"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Pożyczamy 1 z jedności: 7 zamienia się w 6, a dziesiąte 1 zamienia się w 11 (dokładamy 10)."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("6"), bc("11", {active:true}), bc("10")) +
+        brow("−", bc("3"), bc("4", {active:true}), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("7", {cls:"result", active:true}), bc("5", {cls:"result"}))
+      ),
+      caption: "11 − 4 = 7. To nasze dziesiąte w wyniku."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("6", {active:true}), bc("11"), bc("10")) +
+        brow("−", bc("3", {active:true}), bc("4"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("7", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Zostały jedności: 6 − 3."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("6"), bc("11"), bc("10")) +
+        brow("−", bc("3"), bc("4"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("3", {cls:"result", active:true}), bc("7", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Gotowe! 7,20 − 3,45 = 3,75 🎉"
+    }
+  ];
+
+  // 8,00 - 0,35: pożyczka "przeskakuje" przez dziesiąte, bo one też są zerem
+  var CASCADE_8_DEMO = [
+    {
+      html: borrowStage(
+        brow("", bc("8"), bc("0"), bc("0", {active:true})) +
+        brow("−", bc("0"), bc("3"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Setne: 0 − 5. Za mało — trzeba pożyczyć z dziesiątych."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("8"), bc("0", {active:true}), bc("0")) +
+        brow("−", bc("0"), bc("3"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Ale dziesiąte też są zerem — nie ma skąd pożyczyć bezpośrednio! Pożyczka musi pójść jeszcze dalej, do jedności."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7", {old:"8", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"}), bc("0")) +
+        brow("−", bc("0"), bc("3"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Pożyczamy z jedności: 8 zamienia się w 7, a dziesiąte dostają całą dziesiątkę — mają teraz 10."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("9", {old:"10", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"})) +
+        brow("−", bc("0"), bc("3"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("–", {cls:"empty"}))
+      ),
+      caption: "Ale te dziesiąte (10) same muszą teraz oddać 1 do setnych: zostaje im 9, a setne dostają swoją dziesiątkę — mają 10."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("9"), bc("10", {active:true})) +
+        brow("−", bc("0"), bc("3"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("–", {cls:"empty"}), bc("5", {cls:"result", active:true}))
+      ),
+      caption: "Teraz można liczyć: setne: 10 − 5 = 5."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("9", {active:true}), bc("10")) +
+        brow("−", bc("0"), bc("3", {active:true}), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("–", {cls:"empty"}), bc("6", {cls:"result", active:true}), bc("5", {cls:"result"}))
+      ),
+      caption: "Dziesiąte: 9 − 3 = 6."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7", {active:true}), bc("9"), bc("10")) +
+        brow("−", bc("0", {active:true}), bc("3"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("7", {cls:"result", active:true}), bc("6", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Jedności: 7 − 0 = 7."
+    },
+    {
+      html: borrowStage(
+        brow("", bc("7"), bc("9"), bc("10")) +
+        brow("−", bc("0"), bc("3"), bc("5")) +
+        '<div class="divider"></div>' +
+        brow("", bc("7", {cls:"result"}), bc("6", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Gotowe! 8 − 0,35 = 7,65 🎉"
+    }
+  ];
+
+  // 100,00 - 45,75: pożyczka kaskaduje przez trzy zera (dziesiąte, jedności, dziesiątki) aż do setek
+  var CASC_HEAD = ["setki", "dzies.", "jedn.", ",,", "dzies.", "setne"];
+  var CASC_COLS = "24px 40px 40px 40px 16px 40px 40px";
+  function cascRow(sign, setki, dziesiatki, jedn, dziesiate, setne){
+    return browN(sign, [setki, dziesiatki, jedn, ",,", dziesiate, setne]);
+  }
+  function cascStage(rows){ return borrowStageN(CASC_HEAD, CASC_COLS, rows); }
+
+  var CASCADE_100_DEMO = [
+    {
+      html: cascStage(
+        cascRow("", bc("1"), bc("0"), bc("0"), bc("0"), bc("0", {active:true})) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Setne: 0 − 5. Za mało — trzeba pożyczyć z dziesiątych."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("1"), bc("0"), bc("0"), bc("0", {active:true}), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Dziesiąte też są zerem. Pożyczka idzie dalej — do jedności."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("1"), bc("0"), bc("0", {active:true}), bc("0"), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Jedności też są zerem! Pożyczka idzie jeszcze dalej — do dziesiątek."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("1"), bc("0", {active:true}), bc("0"), bc("0"), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Dziesiątki też są zerem! Ostatnia szansa — pożyczamy z setek."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0", {old:"1", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"}), bc("0"), bc("0"), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Setki: 1 zamienia się w 0, a dziesiątki dostają całą dziesiątkę — mają teraz 10."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9", {old:"10", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"}), bc("0"), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Te dziesiątki (10) same muszą oddać 1 do jedności: zostaje 9, jedności dostają swoją dziesiątkę — mają 10."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9", {old:"10", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"}), bc("0")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Jedności (10) oddają 1 do dziesiątych: zostaje 9, dziesiąte dostają 10."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9"), bc("9", {old:"10", active:true, cls:"new"}), bc("10", {old:"0", active:true, cls:"new"})) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}))
+      ),
+      caption: "Dziesiąte (10) oddają 1 do setnych: zostaje 9, setne dostają 10. Kaskada dotarła na koniec!"
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9"), bc("9"), bc("10", {active:true})) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5", {active:true})) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("5", {cls:"result", active:true}))
+      ),
+      caption: "Teraz liczymy od początku, od prawej: setne: 10 − 5 = 5."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9"), bc("9", {active:true}), bc("10")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7", {active:true}), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("2", {cls:"result", active:true}), bc("5", {cls:"result"}))
+      ),
+      caption: "Dziesiąte: 9 − 7 = 2."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9", {active:true}), bc("9"), bc("10")) +
+        cascRow("−", bc(""), bc("4"), bc("5", {active:true}), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("–",{cls:"empty"}), bc("4", {cls:"result", active:true}), bc("2", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Jedności: 9 − 5 = 4."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9", {active:true}), bc("9"), bc("9"), bc("10")) +
+        cascRow("−", bc(""), bc("4", {active:true}), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("5", {cls:"result", active:true}), bc("4", {cls:"result"}), bc("2", {cls:"result"}), bc("5", {cls:"result"}))
+      ),
+      caption: "Dziesiątki: 9 − 4 = 5. Setki: 0 − 0 = 0, więc je pomijamy."
+    },
+    {
+      html: cascStage(
+        cascRow("", bc("0"), bc("9"), bc("9"), bc("9"), bc("10")) +
+        cascRow("−", bc(""), bc("4"), bc("5"), bc("7"), bc("5")) +
+        '<div class="divider"></div>' +
+        cascRow("", bc("–",{cls:"empty"}), bc("5", {cls:"result"}), bc("4", {cls:"result"}), bc("2", {cls:"result"}), bc("5", {cls:"result"})) 
+      ),
+      caption: "Gotowe! 100 − 45,75 = 54,25 🎉 Długi łańcuch pożyczek, ale krok po kroku się udało."
+    }
+  ];
+
+  var SHORTCUT_TIP_HTML =
+    '<div class="mistake-box" style="border-left-color: var(--green); background: var(--green-soft);">' +
+      '<h4 style="color: var(--green);">💡 Sposób na skróty: odejmowanie od okrągłej liczby</h4>' +
+      '<p>Kiedy odejmujesz ułamek od „okrągłej" liczby całkowitej (np. 20, 100) i pożyczanie kaskaduje przez same zera, dużo łatwiej rozbić to na dwa prostsze kroki zamiast jednego trudnego pożyczania:</p>' +
+      '<p><b>1.</b> Odejmij najpierw samą część całkowitą liczby odejmowanej.<br><b>2.</b> Odejmij resztę (część po przecinku) od otrzymanego wyniku.</p>' +
+      '<div class="compare-row">' +
+        '<div class="compare-box right">100 − 45 = 55<br>55 − 0,75 = <u>54,25</u></div>' +
+        '<div class="compare-box right">20 − 12 = 8<br>8 − 0,25 = <u>7,75</u></div>' +
+      '</div>' +
+      '<p>To dokładnie ten sam wynik co pożyczanie „na raz", ale bez ani jednej kaskady przez zera — dużo mniej miejsc, w których można się pomylić.</p>' +
+    '</div>';
+
+  var COMMA_DEMO = [
+    {
+      html: '<div class="eq-display">' +
+        '<div class="num-block"><span>1,<span class="hl">2</span></span><span class="tag">1 cyfra po przecinku</span></div>' +
+        '<span class="op">×</span>' +
+        '<div class="num-block"><span>0,<span class="hl">3</span></span><span class="tag">1 cyfra po przecinku</span></div>' +
+        '</div>',
+      caption: "Policz, ile cyfr po przecinku ma każda z mnożonych liczb. W 1,2 jest jedna cyfra po przecinku, w 0,3 też jedna."
+    },
+    {
+      html: '<div class="eq-display">' +
+        '<div class="frac"><span>12</span><span class="line"></span><span>10</span></div>' +
+        '<span class="op">×</span>' +
+        '<div class="frac"><span>3</span><span class="line"></span><span>10</span></div>' +
+        '</div>',
+      caption: "Ułamek dziesiętny to tak naprawdę ułamek zwykły: 1,2 = 12/10, a 0,3 = 3/10. Jedna cyfra po przecinku = dzielimy przez 10."
+    },
+    {
+      html: '<div class="eq-display">' +
+        '<div class="frac"><span>12</span><span class="line"></span><span>10</span></div>' +
+        '<span class="op">×</span>' +
+        '<div class="frac"><span>3</span><span class="line"></span><span>10</span></div>' +
+        '<span class="op">=</span>' +
+        '<div class="frac"><span>36</span><span class="line"></span><span>100</span></div>' +
+        '</div>',
+      caption: "Mnożymy liczniki: 12 × 3 = 36. Mnożymy mianowniki: 10 × 10 = 100."
+    },
+    {
+      html: '<div class="eq-display">' +
+        '<div class="frac"><span>36</span><span class="line"></span><span>100</span></div>' +
+        '<span class="op">=</span>' +
+        '<span class="final">0,36</span>' +
+        '</div>',
+      caption: "Mianownik 100 = dwie cyfry po przecinku w wyniku (bo 100 to 10×10). Dlatego liczymy razem cyfry po przecinku obu czynników: 1 + 1 = 2 — i tyle cyfr odliczamy w wyniku!"
+    }
+  ];
+
+  var ZERO_MISTAKE_HTML =
+    '<div class="mistake-box">' +
+      '<h4>⚠️ Częsty błąd: gdzie stawiać dopisane zero?</h4>' +
+      '<p>Kiedy liczby mają różną liczbę cyfr po przecinku, dopisujesz zero, żeby to wyrównać. To zero ląduje zawsze na <b>samym końcu liczby</b> — nigdy zaraz po przecinku!</p>' +
+      '<div class="compare-row">' +
+        '<div class="compare-box wrong"><span class="tag">❌ ŹLE</span>3,9 → 3,<span class="zero-hl">0</span>9</div>' +
+        '<div class="compare-box right"><span class="tag">✅ DOBRZE</span>3,9 → 3,9<span class="zero-hl">0</span></div>' +
+      '</div>' +
+      '<p>3,9 to „trzy całe i dziewięć dziesiątych” — cyfra 9 zostaje na swoim miejscu (dziesiąte), a nowe zero dopisujesz <b>po niej</b>, w miejscu setnych. Jeśli wstawisz zero zaraz po przecinku, zmienisz wartość liczby prawie trzykrotnie (3,09 to zupełnie inna liczba niż 3,9)!</p>' +
+    '</div>';
+
+  var ORDER_MISTAKE_HTML =
+    '<div class="mistake-box">' +
+      '<h4>⚠️ Zawsze odejmuj MNIEJSZĄ liczbę od WIĘKSZEJ</h4>' +
+      '<p>Dopóki nie poznasz liczb ujemnych, odejmowanie ma sens tylko w jedną stronę: od liczby większej odejmujesz mniejszą.</p>' +
+      '<div class="compare-row">' +
+        '<div class="compare-box wrong"><span class="tag">❌ ŹLE</span>3,2 − 5,7</div>' +
+        '<div class="compare-box right"><span class="tag">✅ DOBRZE</span>5,7 − 3,2</div>' +
+      '</div>' +
+      '<p>3,2 jest mniejsze niż 5,7, więc „3,2 − 5,7” nie da się policzyć bez liczb ujemnych. Jeśli w zadaniu wyszło Ci, że musisz odjąć większą liczbę od mniejszej — to sygnał, żeby sprawdzić, czy dobrze przeczytałaś/eś zadanie, albo po prostu zamienić liczby miejscami.</p>' +
+    '</div>';
+
+  var COMPARE_DEMO = [
+    {
+      html: '<div class="eq-display"><span>3,5</span><span class="op">vs</span><span>3,45</span></div>',
+      caption: "Chcemy porównać: 3,5 i 3,45. Która liczba jest większa?"
+    },
+    {
+      html: '<div class="eq-display"><span><span class="hl">3</span>,5</span><span class="op">vs</span><span><span class="hl">3</span>,45</span></div>',
+      caption: "Najpierw porównaj części całkowite (przed przecinkiem): tu obie mają 3 — są równe, więc patrzymy dalej."
+    },
+    {
+      html: '<div class="eq-display"><span>3,5 → 3,<span class="hl">50</span></span><span class="op">vs</span><span>3,45</span></div>',
+      caption: "Żeby łatwo porównać cyfry po przecinku, dopisz zero: 3,5 to to samo co 3,50. Teraz obie liczby mają dwie cyfry po przecinku."
+    },
+    {
+      html: '<div class="eq-display"><span>3,<span class="hl">5</span>0</span><span class="op">vs</span><span>3,<span class="hl">4</span>5</span></div>',
+      caption: "Porównaj dziesiąte: 5 dziesiątych (w 3,50) to więcej niż 4 dziesiąte (w 3,45)."
+    },
+    {
+      html: '<div class="eq-display"><span class="final">3,5 &gt; 3,45</span></div>',
+      caption: "Więc 3,5 jest większe! Dlatego przy odejmowaniu tych liczb zaczynamy od 3,5: 3,5 − 3,45 = 0,05."
+    }
+  ];
+
+  // ---------- DANE ----------
+  var SECTIONS = [
+    {
+      id: "dodawanie",
+      label: "Dodawanie",
+      icon: "➕",
+      pdfFile: "karty-pracy-dodawanie.pdf",
+      pdfPages: 10,
+      rule: "Zapisz liczby jedna pod drugą tak, żeby <b>przecinek był dokładnie pod przecinkiem</b>. Jeśli liczby mają różną liczbę cyfr po przecinku, dopisz zera na końcu krótszej, żeby obie miały tyle samo cyfr po przecinku. Dodajesz jak zwykłe liczby całkowite, a w wyniku przecinek stawiasz dokładnie pod przecinkami składników.",
+      speech: "Dodawanie ułamków dziesiętnych. Żeby dodać dwa ułamki dziesiętne, zapisz je jedna liczba pod drugą, tak żeby przecinek był dokładnie pod przecinkiem. Jeśli jedna liczba ma mniej cyfr po przecinku, dopisz na końcu zera, żeby obie liczby miały tyle samo cyfr po przecinku. Potem dodajesz tak, jakby to były zwykłe liczby całkowite, a w wyniku stawiasz przecinek dokładnie pod przecinkami, które dodawałaś. Na przykład: trzy całe, czterdzieści pięć setnych, plus dwa całe, siedem dziesiątych. Zapisujemy: trzy przecinek czterdzieści pięć, oraz dwa przecinek siedemdziesiąt, bo dopisujemy zero. Dodajemy: pięć plus zero to pięć, cztery plus siedem to jedenaście, piszemy jeden, jeden zapamiętujemy, trzy plus dwa plus jeden w pamięci to sześć. Wynik: sześć przecinek piętnaście. Uwaga na częsty błąd: to dopisane zero zawsze ląduje na samym końcu liczby, nigdy zaraz po przecinku. Dwa i dziewięć dziesiątych to trzy przecinek dziewięćdziesiąt, a nie trzy przecinek zero dziewięć — to są dwie zupełnie różne liczby.",
+      example: {
+        headers: ["j", ",", "d", "s"],
+        rows: [
+          ["3", ",", "4", "5"],
+          ["+2", ",", "7", "0"]
+        ],
+        result: ["6", ",", "1", "5"]
+      },
+      example2: {
+        headers: ["j", ",", "d", "s"],
+        rows: [
+          ["1", ",", "2", "0"],
+          ["+2", ",", "3", "0"],
+          ["+0", ",", "5", "0"]
+        ],
+        result: ["4", ",", "0", "0"]
+      },
+      example2Label: "A gdy liczb jest więcej niż dwie?",
+      example2Note: "Zasada działa dokładnie tak samo, niezależnie od tego, ile liczb dodajesz naraz. Wyrównaj cyframi po przecinku (dopisując zera na końcu) i dodawaj kolumna po kolumnie.",
+      mistakeBox: ZERO_MISTAKE_HTML,
+      quiz: [
+        { q: "2,3 + 1,45 = ?", options: ["3,75", "3,85", "2,78", "3,65"], correct: 0, expl: "2,30 + 1,45 = 3,75 — dopisujemy zero do 2,3, żeby wyrównać liczbę cyfr po przecinku." },
+        { q: "0,6 + 0,25 = ?", options: ["0,31", "0,65", "0,85", "0,90"], correct: 2, expl: "0,60 + 0,25 = 0,85." },
+        { q: "5 + 2,4 = ?", options: ["7,4", "2,9", "7,04", "5,24"], correct: 0, expl: "5,0 + 2,4 = 7,4 — liczba całkowita to tyle, co liczba z zerem po przecinku." },
+        { q: "3,08 + 1,9 = ?", options: ["3,17", "4,17", "4,98", "4,08"], correct: 2, expl: "3,08 + 1,90 = 4,98." },
+        { q: "12,5 + 3,75 = ?", options: ["15,75", "16,75", "15,25", "16,25"], correct: 3, expl: "12,50 + 3,75 = 16,25." },
+        { q: "Jak poprawnie dopisać zero do liczby 3,9, żeby miała dwie cyfry po przecinku?", options: ["3,09", "3,90", "30,9", "0,39"], correct: 1, expl: "Zero dopisujemy na końcu, po ostatniej cyfrze: 3,9 = 3,90. Wersja 3,09 to zupełnie inna, dużo mniejsza liczba!" },
+        { q: "1,2 + 2,3 + 0,5 = ?", options: ["3,0", "4,0", "4,5", "0,4"], correct: 1, expl: "1,20 + 2,30 + 0,50 = 4,00 — trzy składniki dodajemy dokładnie tak samo jak dwa." }
+      ],
+      tasks: [
+        { q: "4,25 + 3,6 = ?", a: 7.85, hint: "Dopisz zero do 3,6, żeby otrzymać 3,60, i dodaj tak jak liczby całkowite." },
+        { q: "0,45 + 0,55 = ?", a: 1, hint: "Setne dodają się do 100 setnych, czyli jednej całości." },
+        { q: "9 + 2,34 = ?", a: 11.34, hint: "9 to 9,00 — dodaj część całkowitą osobno." },
+        { q: "15,7 + 4,25 = ?", a: 19.95, hint: "Zapisz 15,70 pod 4,25 i dodaj kolumnami." },
+        { q: "3,9 + 1,25 = ?", a: 5.15, hint: "Uwaga na pułapkę: 3,9 dopisujesz jako 3,90 (zero na końcu!), nie 3,09." },
+        { q: "2,05 + 3,9 + 0,05 = ?", a: 6, hint: "3,9 to 3,90 (zero na końcu). Zapisz wszystkie trzy liczby jedna pod drugą i dodaj kolumnami." }
+      ]
+    },
+    {
+      id: "odejmowanie",
+      label: "Odejmowanie",
+      icon: "➖",
+      pdfFile: "karty-pracy-odejmowanie.pdf",
+      pdfPages: 10,
+      compareLabel: "🔎 Zanim odejmiesz: która liczba jest większa?",
+      compareIntro: "Odejmowanie to nie to samo co dodawanie — <b>kolejność ma znaczenie</b>. Zanim zaczniesz odejmować, sprawdź, która liczba jest większa: porównaj najpierw części całkowite (przed przecinkiem), a jeśli są równe, porównaj kolejne cyfry po przecinku od lewej strony (dziesiąte, potem setne). Uważaj na pułapkę: 3,5 to więcej niż 3,45, mimo że „45” wygląda na większą liczbę — dopisz zero (3,5 = 3,50), żeby łatwo to zobaczyć.",
+      compareDemo: COMPARE_DEMO,
+      orderMistakeBox: ORDER_MISTAKE_HTML,
+      rule: "Tak jak przy dodawaniu — zapisz liczby jedna pod drugą, <b>przecinek pod przecinkiem</b>, dopisz zera, żeby obie liczby miały tyle samo cyfr po przecinku. Odejmujesz jak liczby całkowite, pamiętając o <b>pożyczaniu</b>, jeśli cyfra na górze jest mniejsza od cyfry na dole.",
+      speech: "Odejmowanie ułamków dziesiętnych działa bardzo podobnie do dodawania. Zapisujesz liczby jedna pod drugą, tak żeby przecinek był pod przecinkiem, i dopisujesz zera, żeby obie liczby miały tyle samo miejsc po przecinku. Potem odejmujesz tak jak liczby całkowite, pamiętając o pożyczaniu, jeśli trzeba. Na przykład: siedem całych, dwie dziesiąte, minus trzy całe, czterdzieści pięć setnych. Zapisujemy siedem przecinek dwadzieścia minus trzy przecinek czterdzieści pięć. Ponieważ zero jest mniejsze od pięciu, pożyczamy z sąsiedniej cyfry. Wynik to trzy przecinek siedemdziesiąt pięć.",
+      example: {
+        headers: ["j", ",", "d", "s"],
+        rows: [
+          ["7", ",", "2", "0"],
+          ["-3", ",", "4", "5"]
+        ],
+        result: ["3", ",", "7", "5"]
+      },
+      borrowDemo: BORROW_DEMO,
+      cascadeDemos: [
+        { id: "casc8", title: "Przykład: 8 − 0,35 (pożyczka przez jedno dodatkowe zero)", demo: CASCADE_8_DEMO },
+        { id: "casc100", title: "Przykład: 100 − 45,75 (pożyczka przez trzy zera)", demo: CASCADE_100_DEMO }
+      ],
+      shortcutTip: SHORTCUT_TIP_HTML,
+      mistakeBox: ZERO_MISTAKE_HTML,
+      quiz: [
+        { q: "5,6 - 2,3 = ?", options: ["3,3", "3,4", "2,3", "3,9"], correct: 0, expl: "5,6 - 2,3 = 3,3." },
+        { q: "7 - 2,45 = ?", options: ["4,45", "5,55", "4,55", "4,65"], correct: 2, expl: "7,00 - 2,45 = 4,55." },
+        { q: "4,2 - 1,75 = ?", options: ["2,55", "3,45", "2,45", "2,35"], correct: 2, expl: "4,20 - 1,75 = 2,45." },
+        { q: "10 - 3,08 = ?", options: ["7,92", "6,82", "6,98", "6,92"], correct: 3, expl: "10,00 - 3,08 = 6,92." },
+        { q: "8,3 - 5,17 = ?", options: ["3,23", "2,13", "3,17", "3,13"], correct: 3, expl: "8,30 - 5,17 = 3,13." },
+        { q: "Jak poprawnie dopisać zero do liczby 6,4, żeby miała dwie cyfry po przecinku?", options: ["6,04", "6,40", "60,4", "0,64"], correct: 1, expl: "Zero dopisujemy na końcu: 6,4 = 6,40. Wersja 6,04 to zupełnie inna, mniejsza liczba." },
+        { q: "Która liczba jest większa: 3,5 czy 3,45?", options: ["3,5", "3,45", "są równe", "nie da się porównać"], correct: 0, expl: "3,5 = 3,50, a 3,50 ma więcej setnych (50) niż 3,45 (45), więc 3,5 jest większe." },
+        { q: "Chcesz obliczyć, o ile więcej ma Ola, jeśli Ala ma 2,3 zł, a Ola ma 6,1 zł. Które odejmowanie ma sens?", options: ["2,3 − 6,1", "6,1 − 2,3", "obojętnie które", "żadne z nich"], correct: 1, expl: "Ola ma więcej (6,1 > 2,3), więc od jej kwoty odejmujemy kwotę Ali: 6,1 − 2,3." }
+      ],
+      tasks: [
+        { q: "6,5 - 2,25 = ?", a: 4.25, hint: "Zapisz 6,50 nad 2,25 i odejmij kolumnami, pożyczając gdzie trzeba." },
+        { q: "10 - 4,6 = ?", a: 5.4, hint: "10 to 10,0 — pożyczasz z jedności, żeby odjąć dziesiąte." },
+        { q: "8,03 - 2,5 = ?", a: 5.53, hint: "Dopisz zero do 2,5, żeby mieć 2,50." },
+        { q: "20,15 - 7,4 = ?", a: 12.75, hint: "Zapisz 7,40 pod 20,15 i odejmuj od prawej strony." },
+        { q: "5,8 - 2,35 = ?", a: 3.45, hint: "Uwaga na pułapkę: 5,8 dopisujesz jako 5,80 (zero na końcu!), nie 5,08." },
+        { q: "Ala ma 3,2 zł, a Ola ma 5,75 zł. O ile więcej ma Ola?", a: 2.55, hint: "Sprawdź, kto ma więcej — od tej kwoty odejmij mniejszą (5,75 − 3,2, czyli 5,75 − 3,20)." }
+      ]
+    },
+    {
+      id: "mnozenie",
+      label: "Mnożenie",
+      icon: "✖️",
+      pdfFile: "karty-pracy-mnozenie.pdf",
+      pdfPages: 10,
+      rule: "Mnóż liczby tak, <b>jakby przecinków nie było</b> — jak zwykłe liczby całkowite. Na koniec policz, ile razem cyfr po przecinku miały oba czynniki, i tyle samo cyfr odlicz od prawej strony w wyniku. Mnożenie przez 10, 100, 1000 to po prostu przesunięcie przecinka w prawo o tyle miejsc, ile jest zer.",
+      speech: "Mnożenie ułamków dziesiętnych. Mnożysz liczby tak, jakby przecinków w ogóle nie było, czyli jak zwykłe liczby całkowite. Na koniec liczysz, ile razem cyfr po przecinku miały oba czynniki, i dokładnie tyle cyfr po przecinku odliczasz od prawej strony w wyniku. Na przykład: jeden przecinek dwa razy zero przecinek trzy. Mnożymy dwanaście razy trzy, wychodzi trzydzieści sześć. W liczbie jeden przecinek dwa jest jedna cyfra po przecinku, a w zero przecinek trzy też jedna, czyli razem dwie. W wyniku odliczamy dwie cyfry od prawej: zero przecinek trzydzieści sześć. Jeśli mnożysz przez dziesięć, sto albo tysiąc, po prostu przesuwasz przecinek w prawo o tyle miejsc, ile jest zer.",
+      steps: [
+        { boxes: ["1,2 × 0,3"], arrow: "pomijamy przecinki" },
+        { boxes: ["12 × 3 = 36"], arrow: "1 + 1 = 2 cyfry po przecinku" },
+        { boxes: ["0,36"], final: true }
+      ],
+      commaDemo: COMMA_DEMO,
+      quiz: [
+        { q: "1,2 × 0,3 = ?", options: ["0,36", "3,6", "0,036", "0,306"], correct: 0, expl: "12 × 3 = 36, dwa miejsca po przecinku → 0,36." },
+        { q: "2,5 × 4 = ?", options: ["1", "0,1", "10", "100"], correct: 2, expl: "25 × 4 = 100, jedno miejsce po przecinku → 10,0 czyli 10." },
+        { q: "0,7 × 0,8 = ?", options: ["5,6", "0,65", "0,506", "0,56"], correct: 3, expl: "7 × 8 = 56, dwa miejsca po przecinku → 0,56." },
+        { q: "3,4 × 10 = ?", options: ["3,40", "0,34", "340", "34"], correct: 3, expl: "Mnożenie przez 10 przesuwa przecinek o jedno miejsce w prawo: 34." },
+        { q: "1,5 × 1,5 = ?", options: ["2,5", "3,25", "2,05", "2,25"], correct: 3, expl: "15 × 15 = 225, dwa miejsca po przecinku → 2,25." }
+      ],
+      tasks: [
+        { q: "2,3 × 3 = ?", a: 6.9, hint: "23 × 3 = 69, jedno miejsce po przecinku." },
+        { q: "0,6 × 0,4 = ?", a: 0.24, hint: "6 × 4 = 24, dwa miejsca po przecinku." },
+        { q: "1,25 × 100 = ?", a: 125, hint: "Mnożenie przez 100 przesuwa przecinek o dwa miejsca w prawo." },
+        { q: "3,3 × 2,2 = ?", a: 7.26, hint: "33 × 22 = 726, dwa miejsca po przecinku." }
+      ]
+    },
+    {
+      id: "dzielenie",
+      label: "Dzielenie",
+      icon: "➗",
+      pdfFile: "karty-pracy-dzielenie.pdf",
+      pdfPages: 10,
+      rule: "Dzieląc przez <b>liczbę naturalną</b>, dziel jak zwykłe dzielenie pisemne — przecinek w wyniku stawiasz w chwili, gdy znosisz pierwszą cyfrę po przecinku z dzielnej. Dzieląc przez <b>ułamek dziesiętny</b>, najpierw przesuń przecinek w dzielniku tak, żeby stał się liczbą całkowitą, i o tyle samo miejsc przesuń przecinek w dzielnej — dopiero potem dziel.",
+      speech: "Dzielenie ułamków dziesiętnych. Kiedy dzielisz ułamek dziesiętny przez liczbę naturalną, dzielisz tak jak zwykłe dzielenie pisemne, a przecinek w wyniku stawiasz w tym momencie, w którym znosisz pierwszą cyfrę po przecinku z dzielnej. Kiedy dzielnik też jest ułamkiem dziesiętnym, najpierw przesuwasz przecinek w dzielniku tak, żeby stał się liczbą całkowitą, i o tyle samo miejsc przesuwasz przecinek w dzielnej. Na przykład: cztery przecinek osiem podzielić przez zero przecinek cztery. Przesuwamy przecinek w obu liczbach o jedno miejsce w prawo, i mamy czterdzieści osiem podzielić przez cztery, czyli dwanaście.",
+      steps: [
+        { boxes: ["4,8 : 0,4"], arrow: "przesuwamy przecinek o 1 miejsce w obu liczbach" },
+        { boxes: ["48 : 4"], arrow: "dzielimy normalnie" },
+        { boxes: ["12"], final: true }
+      ],
+      quiz: [
+        { q: "8,4 : 4 = ?", options: ["21", "0,21", "2,4", "2,1"], correct: 3, expl: "84 : 4 = 21, przecinek stawiamy po pierwszej cyfrze → 2,1." },
+        { q: "6 : 0,5 = ?", options: ["3", "0,3", "1,2", "12"], correct: 3, expl: "Przesuwamy przecinek: 60 : 5 = 12." },
+        { q: "4,8 : 0,4 = ?", options: ["1,2", "120", "0,12", "12"], correct: 3, expl: "48 : 4 = 12." },
+        { q: "12,6 : 3 = ?", options: ["42", "0,42", "4,6", "4,2"], correct: 3, expl: "126 : 3 = 42, przecinek po pierwszej cyfrze → 4,2." },
+        { q: "0,9 : 0,3 = ?", options: ["0,3", "30", "9,3", "3"], correct: 3, expl: "Przesuwamy przecinek: 9 : 3 = 3." }
+      ],
+      tasks: [
+        { q: "9,6 : 3 = ?", a: 3.2, hint: "96 : 3 = 32, przecinek po pierwszej cyfrze wyniku." },
+        { q: "7,5 : 0,5 = ?", a: 15, hint: "Przesuń przecinek w obu liczbach: 75 : 5." },
+        { q: "6,4 : 0,8 = ?", a: 8, hint: "Przesuń przecinek: 64 : 8." },
+        { q: "15,9 : 3 = ?", a: 5.3, hint: "159 : 3 = 53, przecinek po pierwszej cyfrze." }
+      ]
+    }
+  ];
+
+  // ---------- STAN / ZAPIS POSTĘPU ----------
+  var STORAGE_KEY = "ulamki-marysia-progress-v1";
+  var state = {};
+  SECTIONS.forEach(function(s){
+    state[s.id] = { quizIndex: 0, quizCorrect: 0, quizDone: false, tasksSolved: {} };
+  });
+
+  function loadProgress(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var saved = JSON.parse(raw);
+        SECTIONS.forEach(function(s){
+          if (saved[s.id]) state[s.id] = saved[s.id];
+        });
+      }
+    } catch(e) { /* brak dostępu do pamięci — pracujemy tylko w tej sesji */ }
+  }
+  function saveProgress(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+  loadProgress();
+
+  // ---------- BUDOWA NAWIGACJI ----------
+  var tabsEl = document.getElementById("tabs");
+  var sectionsEl = document.getElementById("sections");
+  var activeId = SECTIONS[0].id;
+
+  function starsFor(sectionId){
+    var s = state[sectionId];
+    var sec = SECTIONS.filter(function(x){return x.id===sectionId;})[0];
+    var quizStars = sec.quiz.length ? Math.round((s.quizCorrect / sec.quiz.length) * 2) : 0;
+    var tasksSolvedCount = Object.keys(s.tasksSolved).filter(function(k){return s.tasksSolved[k];}).length;
+    var taskStars = sec.tasks.length ? Math.round((tasksSolvedCount / sec.tasks.length) * 1) : 0;
+    var total = Math.min(3, quizStars + taskStars);
+    return total;
+  }
+
+  function starString(n){
+    var out = "";
+    for (var i=0;i<3;i++) out += (i < n ? "★" : "☆");
+    return out;
+  }
+
+  function renderTabs(){
+    tabsEl.innerHTML = "";
+    SECTIONS.forEach(function(s){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tab-btn" + (s.id === activeId ? " active" : "");
+      btn.innerHTML = s.icon + " " + s.label + "<span class='stars'>" + starString(starsFor(s.id)) + "</span>";
+      btn.addEventListener("click", function(){
+        activeId = s.id;
+        renderTabs();
+        renderSections();
+        window.scrollTo({top: 0, behavior:"smooth"});
+      });
+      tabsEl.appendChild(btn);
+    });
+  }
+
+  function renderOverallStars(){
+    var el = document.getElementById("overallStars");
+    var totalStars = 0;
+    SECTIONS.forEach(function(s){ totalStars += starsFor(s.id); });
+    el.innerHTML = '<span class="chip">🌟 ' + totalStars + ' / ' + (SECTIONS.length*3) + ' gwiazdek</span>';
+  }
+
+  // ---------- BUDOWA PRZYKŁADU KOLUMNOWEGO ----------
+  function buildColgrid(example){
+    var cols = example.headers.length;
+    var html = '<div class="colgrid" style="grid-template-columns: repeat(' + cols + ', 30px);">';
+    example.rows.forEach(function(row){
+      row.forEach(function(cell, i){
+        var cls = "cell" + (cell === "," ? " comma" : "");
+        html += '<div class="' + cls + '">' + cell + '</div>';
+      });
+    });
+    html += '<div class="line-row"></div>';
+    example.result.forEach(function(cell){
+      var cls = "cell result" + (cell === "," ? " comma" : "");
+      html += '<div class="' + cls + '"><span class="cell">' + cell + '</span></div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function buildSteps(steps){
+    var html = '<div class="steps-flow">';
+    steps.forEach(function(st, i){
+      html += '<span class="box' + (st.final ? ' final' : '') + '">' + st.boxes[0] + '</span>';
+      if (st.arrow) html += '<span class="arrow">→ ' + st.arrow + ' →</span>';
+      else if (i < steps.length - 1) html += '<span class="arrow">→</span>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  // ---------- MOWA (audio) ----------
+  var currentUtterance = null;
+  function speak(text, btn){
+    if (!('speechSynthesis' in window)) {
+      btn.textContent = "🔇 Ta przeglądarka nie obsługuje czytania na głos";
+      return;
+    }
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      btn.classList.remove("speaking");
+      btn.textContent = "🔊 Przeczytaj teorię na głos";
+      return;
+    }
+    try {
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "pl-PL";
+      u.rate = 0.95;
+      var voices = window.speechSynthesis.getVoices();
+      var plVoice = voices.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("pl") === 0; })[0];
+      if (plVoice) u.voice = plVoice;
+      u.onstart = function(){ btn.classList.add("speaking"); btn.textContent = "⏸️ Czytam... (kliknij, by zatrzymać)"; };
+      u.onend = function(){ btn.classList.remove("speaking"); btn.textContent = "🔊 Przeczytaj teorię na głos"; };
+      u.onerror = function(){ btn.classList.remove("speaking"); btn.textContent = "🔊 Przeczytaj teorię na głos"; };
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch(e) {
+      btn.textContent = "🔇 Nie udało się uruchomić czytania";
+    }
+  }
+
+  // ---------- STEPPER (kroki wyjaśnień) ----------
+  function createStepper(containerId, frames){
+    var idx = 0;
+    var root = document.getElementById(containerId);
+    if (!root) return;
+    function render(){
+      var f = frames[idx];
+      var dots = frames.map(function(_, i){ return '<span class="' + (i === idx ? 'active' : '') + '"></span>'; }).join('');
+      root.innerHTML =
+        '<div class="stepper-stage">' + f.html + '</div>' +
+        '<div class="stepper-caption">' + f.caption + '</div>' +
+        '<div class="stepper-controls">' +
+          '<button type="button" id="' + containerId + '-prev"' + (idx === 0 ? ' disabled' : '') + '>← Wstecz</button>' +
+          '<div class="stepper-dots">' + dots + '</div>' +
+          '<button type="button" id="' + containerId + '-next"' + (idx === frames.length - 1 ? ' disabled' : '') + '>Dalej →</button>' +
+        '</div>';
+      document.getElementById(containerId + "-prev").addEventListener("click", function(){ if (idx > 0) { idx--; render(); } });
+      document.getElementById(containerId + "-next").addEventListener("click", function(){ if (idx < frames.length - 1) { idx++; render(); } });
+    }
+    render();
+  }
+
+  // ---------- POBIERANIE KART PRACY (Netlify Forms + e-mail) ----------
+  var PDF_STORAGE_KEY = "ulamki-marysia-pdf-unlocked-v1";
+  var unlockedPdfs = {};
+  try {
+    var rawPdf = localStorage.getItem(PDF_STORAGE_KEY);
+    if (rawPdf) unlockedPdfs = JSON.parse(rawPdf);
+  } catch(e) {}
+  function saveUnlocked(){ try { localStorage.setItem(PDF_STORAGE_KEY, JSON.stringify(unlockedPdfs)); } catch(e) {} }
+
+  function renderDownloadGate(sec){
+    var formHost = document.getElementById("dlform-" + sec.id);
+    var readyBox = document.getElementById("dlready-" + sec.id);
+    if (!formHost || !readyBox) return;
+    if (unlockedPdfs[sec.id]) {
+      formHost.style.display = "none";
+      readyBox.classList.add("show");
+      return;
+    }
+    formHost.innerHTML =
+      '<form class="email-gate-form" id="realform-' + sec.id + '">' +
+        '<input type="email" required placeholder="twój e-mail" id="emailinput-' + sec.id + '">' +
+        '<button type="submit">Odblokuj i pobierz</button>' +
+      '</form>' +
+      '<div class="email-gate-note">Podaj e-mail, żeby odblokować PDF do druku — dzięki temu będziemy mogli przesyłać nowe materiały. Formularz obsługiwany przez Netlify Forms.</div>';
+    var formEl = document.getElementById("realform-" + sec.id);
+    formEl.addEventListener("submit", function(e){
+      e.preventDefault();
+      var emailVal = document.getElementById("emailinput-" + sec.id).value;
+      var body = "form-name=karty-pracy&bot-field=&email=" + encodeURIComponent(emailVal) + "&sekcja=" + encodeURIComponent(sec.id);
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).then(unlock).catch(unlock);
+      function unlock(){
+        unlockedPdfs[sec.id] = true;
+        saveUnlocked();
+        formHost.style.display = "none";
+        readyBox.classList.add("show");
+      }
+    });
+  }
+
+  // ---------- RENDER SEKCJI ----------
+  function renderSections(){
+    sectionsEl.innerHTML = "";
+    var sec = SECTIONS.filter(function(s){ return s.id === activeId; })[0];
+    var wrapper = document.createElement("section");
+    wrapper.className = "op active";
+
+    var teoriaHtml =
+      '<div class="card teoria" id="teoria-' + sec.id + '">' +
+        '<h2>' + sec.icon + ' ' + sec.label + ' ułamków dziesiętnych — teoria</h2>' +
+        (sec.compareIntro ? ('<h3>' + sec.compareLabel + '</h3><div class="rule-box">' + sec.compareIntro + '</div>' + (sec.compareDemo ? ('<div class="stepper-panel" id="stepper-compare-' + sec.id + '"></div>') : '') + (sec.orderMistakeBox || '') + '<h3>A teraz samo odejmowanie — zasada</h3>') : '') +
+        '<div class="rule-box">' + sec.rule + '</div>' +
+        '<h3>Przykład krok po kroku</h3>' +
+        '<div class="example">' +
+          (sec.example ? buildColgrid(sec.example) : '') +
+          (sec.steps ? buildSteps(sec.steps) : '') +
+        '</div>' +
+        (sec.example2 ? ('<h3>' + sec.example2Label + '</h3><p class="multi-note">' + sec.example2Note + '</p><div class="example">' + buildColgrid(sec.example2) + '</div>') : '') +
+        (sec.mistakeBox || '') +
+        (sec.borrowDemo ? ('<h3>🔍 Jak działa pożyczanie? (krok po kroku)</h3><div class="stepper-panel" id="stepper-' + sec.id + '"></div>') : '') +
+        (sec.cascadeDemos ? ('<h3>🔍 Trudniejsze przypadki: pożyczanie przez kilka zer naraz</h3>' + sec.cascadeDemos.map(function(cd){ return '<p class="multi-note">' + cd.title + '</p><div class="stepper-panel" id="stepper-' + cd.id + '-' + sec.id + '"></div>'; }).join('')) : '') +
+        (sec.shortcutTip || '') +
+        (sec.commaDemo ? ('<h3>🔍 Skąd się biorą te cyfry po przecinku?</h3><div class="stepper-panel" id="stepper-' + sec.id + '"></div>') : '') +
+        '<button type="button" class="audio-btn" id="audio-' + sec.id + '">🔊 Przeczytaj teorię na głos</button>' +
+      '</div>';
+
+    var quizHtml =
+      '<div class="card quiz-card" id="quiz-' + sec.id + '">' +
+        '<h2>Mini-quiz</h2>' +
+        '<div id="quiz-body-' + sec.id + '"></div>' +
+      '</div>';
+
+    var tasksHtml =
+      '<div class="card tasks-card">' +
+        '<h2>Zadania do samodzielnego rozwiązania</h2>' +
+        '<div id="tasks-body-' + sec.id + '"></div>' +
+      '</div>';
+
+    var downloadHtml =
+      '<div class="card download-card">' +
+        '<h2>📥 Karty pracy do druku — ' + sec.label.toLowerCase() + '</h2>' +
+        '<p class="lead">Dodatkowy pakiet: ' + (sec.pdfPages || 10) + ' stron zadań do wydrukowania + klucz odpowiedzi dla sprawdzającego.</p>' +
+        '<div id="dlform-' + sec.id + '"></div>' +
+        '<div class="download-ready" id="dlready-' + sec.id + '">' +
+          '<div class="thanks">Dziękujemy! 🎉</div>' +
+          '<a class="dl-link" href="' + (sec.pdfFile || '#') + '" download>⬇️ Pobierz PDF (' + (sec.pdfPages || 10) + ' stron)</a>' +
+        '</div>' +
+      '</div>';
+
+    wrapper.innerHTML = teoriaHtml + quizHtml + tasksHtml + downloadHtml;
+    sectionsEl.appendChild(wrapper);
+
+    document.getElementById("audio-" + sec.id).addEventListener("click", function(){
+      speak(sec.speech, this);
+    });
+    if (sec.borrowDemo) createStepper("stepper-" + sec.id, sec.borrowDemo);
+    if (sec.cascadeDemos) sec.cascadeDemos.forEach(function(cd){ createStepper("stepper-" + cd.id + "-" + sec.id, cd.demo); });
+    if (sec.commaDemo) createStepper("stepper-" + sec.id, sec.commaDemo);
+    if (sec.compareDemo) createStepper("stepper-compare-" + sec.id, sec.compareDemo);
+    renderDownloadGate(sec);
+
+    renderQuiz(sec);
+    renderTasks(sec);
+  }
+
+  // ---------- QUIZ ----------
+  function renderQuiz(sec){
+    var body = document.getElementById("quiz-body-" + sec.id);
+    var st = state[sec.id];
+
+    if (st.quizDone) {
+      body.innerHTML =
+        '<div class="quiz-done show">' +
+          '<div class="big">' + (st.quizCorrect === sec.quiz.length ? "🏆" : "✅") + '</div>' +
+          '<p>Wynik: ' + st.quizCorrect + ' / ' + sec.quiz.length + ' poprawnych odpowiedzi.</p>' +
+          '<button type="button" class="retry-btn" id="retry-' + sec.id + '">Spróbuj quizu jeszcze raz</button>' +
+        '</div>';
+      document.getElementById("retry-" + sec.id).addEventListener("click", function(){
+        state[sec.id].quizIndex = 0;
+        state[sec.id].quizCorrect = 0;
+        state[sec.id].quizDone = false;
+        saveProgress();
+        renderQuiz(sec);
+        renderTabs();
+        renderOverallStars();
+      });
+      return;
+    }
+
+    var qi = st.quizIndex;
+    var q = sec.quiz[qi];
+
+    var html =
+      '<div class="quiz-progress">Pytanie ' + (qi+1) + ' z ' + sec.quiz.length + '</div>' +
+      '<div class="quiz-q">' + q.q + '</div>' +
+      '<div class="quiz-options" id="opts-' + sec.id + '"></div>' +
+      '<div class="feedback" id="fb-' + sec.id + '"></div>' +
+      '<button type="button" class="back-link" id="backlink-' + sec.id + '" style="display:none;">⬆️ Wróć do teorii i przeczytaj jeszcze raz</button><br>' +
+      '<button type="button" class="next-btn" id="next-' + sec.id + '">Następne pytanie →</button>';
+
+    body.innerHTML = html;
+
+    var optsEl = document.getElementById("opts-" + sec.id);
+    q.options.forEach(function(opt, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = opt;
+      b.addEventListener("click", function(){ handleQuizAnswer(sec, i); });
+      optsEl.appendChild(b);
+    });
+  }
+
+  function handleQuizAnswer(sec, chosenIndex){
+    var qi = state[sec.id].quizIndex;
+    var q = sec.quiz[qi];
+    var optsEl = document.getElementById("opts-" + sec.id);
+    var buttons = optsEl.querySelectorAll("button");
+    buttons.forEach(function(b, i){
+      b.disabled = true;
+      if (i === q.correct) b.classList.add("correct");
+      if (i === chosenIndex && chosenIndex !== q.correct) b.classList.add("wrong");
+    });
+
+    var fb = document.getElementById("fb-" + sec.id);
+    var backlink = document.getElementById("backlink-" + sec.id);
+    var nextBtn = document.getElementById("next-" + sec.id);
+
+    if (chosenIndex === q.correct) {
+      state[sec.id].quizCorrect++;
+      fb.className = "feedback show ok";
+      fb.innerHTML = "Brawo, dobrze! <span class='expl'>" + q.expl + "</span>";
+      nextBtn.classList.add("show");
+      nextBtn.textContent = (qi === sec.quiz.length - 1) ? "Zobacz wynik →" : "Następne pytanie →";
+      nextBtn.onclick = function(){
+        state[sec.id].quizIndex++;
+        if (state[sec.id].quizIndex >= sec.quiz.length) state[sec.id].quizDone = true;
+        saveProgress();
+        renderQuiz(sec);
+        renderTabs();
+        renderOverallStars();
+      };
+    } else {
+      fb.className = "feedback show bad";
+      fb.innerHTML = "To jeszcze nie to. <span class='expl'>" + q.expl + "</span>";
+      backlink.style.display = "inline-block";
+      backlink.onclick = function(){
+        var teoriaBox = document.getElementById("teoria-" + sec.id);
+        teoriaBox.scrollIntoView({behavior:"smooth", block:"start"});
+        teoriaBox.classList.add("pulse");
+        setTimeout(function(){ teoriaBox.classList.remove("pulse"); }, 2300);
+      };
+      // pozwól spróbować ponownie to samo pytanie
+      var retryQ = document.createElement("button");
+      retryQ.type = "button";
+      retryQ.className = "retry-btn";
+      retryQ.style.marginLeft = "10px";
+      retryQ.textContent = "Spróbuj tego pytania jeszcze raz";
+      retryQ.addEventListener("click", function(){ renderQuiz(sec); });
+      backlink.insertAdjacentElement("afterend", retryQ);
+    }
+    saveProgress();
+  }
+
+  // ---------- ZADANIA ----------
+  function parseAnswer(str){
+    if (typeof str !== "string") return NaN;
+    var clean = str.trim().replace(",", ".").replace(/\s/g, "");
+    if (clean === "") return NaN;
+    return parseFloat(clean);
+  }
+
+  function renderTasks(sec){
+    var body = document.getElementById("tasks-body-" + sec.id);
+    body.innerHTML = "";
+    sec.tasks.forEach(function(t, idx){
+      var solved = !!state[sec.id].tasksSolved[idx];
+      var taskDiv = document.createElement("div");
+      taskDiv.className = "task" + (solved ? " solved" : "");
+      taskDiv.innerHTML =
+        '<div class="task-q">' + (idx+1) + '. ' + t.q + (solved ? " ✓" : "") + '</div>' +
+        '<div class="task-row">' +
+          '<input type="text" inputmode="decimal" placeholder="np. 3,75" id="input-' + sec.id + '-' + idx + '">' +
+          '<button type="button" id="check-' + sec.id + '-' + idx + '">Sprawdź</button>' +
+        '</div>' +
+        '<div class="task-result" id="result-' + sec.id + '-' + idx + '"></div>';
+      body.appendChild(taskDiv);
+
+      var input = taskDiv.querySelector('#input-' + sec.id + '-' + idx);
+      var checkBtn = taskDiv.querySelector('#check-' + sec.id + '-' + idx);
+      var resultEl = taskDiv.querySelector('#result-' + sec.id + '-' + idx);
+
+      if (solved) input.value = "";
+
+      function doCheck(){
+        var val = parseAnswer(input.value);
+        if (isNaN(val)) {
+          resultEl.className = "task-result show bad";
+          resultEl.textContent = "Wpisz liczbę, np. 3,75 albo 3.75.";
+          return;
+        }
+        if (Math.abs(val - t.a) < 0.005) {
+          resultEl.className = "task-result show ok";
+          resultEl.textContent = "Świetnie, to poprawna odpowiedź! 🎉";
+          state[sec.id].tasksSolved[idx] = true;
+          taskDiv.classList.add("solved");
+          saveProgress();
+          renderTabs();
+          renderOverallStars();
+        } else {
+          resultEl.className = "task-result show bad";
+          resultEl.innerHTML = "Jeszcze nie tak. Podpowiedź: " + t.hint +
+            '<br><button type="button" class="back-link" id="backtask-' + sec.id + '-' + idx + '">⬆️ Wróć do teorii</button>';
+          var backBtn = document.getElementById("backtask-" + sec.id + "-" + idx);
+          backBtn.addEventListener("click", function(){
+            var teoriaBox = document.getElementById("teoria-" + sec.id);
+            teoriaBox.scrollIntoView({behavior:"smooth", block:"start"});
+            teoriaBox.classList.add("pulse");
+            setTimeout(function(){ teoriaBox.classList.remove("pulse"); }, 2300);
+          });
+        }
+      }
+      checkBtn.addEventListener("click", doCheck);
+      input.addEventListener("keydown", function(e){ if (e.key === "Enter") doCheck(); });
+    });
+  }
+
+  // ---------- RESET ----------
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if (!confirm("Na pewno wyczyścić wszystkie postępy Marysi?")) return;
+    SECTIONS.forEach(function(s){
+      state[s.id] = { quizIndex: 0, quizCorrect: 0, quizDone: false, tasksSolved: {} };
+    });
+    saveProgress();
+    renderTabs();
+    renderSections();
+    renderOverallStars();
+  });
+
+  // wymuś załadowanie listy głosów (niektóre przeglądarki ładują asynchronicznie)
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = function(){};
+    window.speechSynthesis.getVoices();
+  }
+
+  renderTabs();
+  renderSections();
+  renderOverallStars();
+})();
+</script>
+</body>
+</html>
