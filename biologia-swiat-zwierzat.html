@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Świat zwierząt — ściąga</title>
+<meta name="description" content="Biologia, dział Świat zwierząt: cechy zwierząt, komórka zwierzęca, poziomy organizacji, kręgowce i bezkręgowce, tkanki nabłonkowa, mięśniowa, nerwowa i łączna. Ściąga, gry, quizy i fiszki.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FDFDF8; --grid:#D3E3F0; --ink:#1F3A93; --pencil:#D2384B; --ok:#2E8B57; --text:#2B2F38; --muted:#6B7280;
+  --l1:#2F6FDE; --l1b:#E3EDFD; --l2:#D97000; --l2b:#FFEFD9; --l3:#2E8B57; --l3b:#E2F4EA; --l4:#8E44AD; --l4b:#F2E6F8;
+  /* tkanki */
+  --nab:#2F6FDE; --nabb:#E3EDFD; --mie:#D2384B; --mieb:#FDE8EB; --ner:#C98A00; --nerb:#FFF4D6; --lac:#2E8B57; --lacb:#E2F4EA;
+  /* poziomy organizacji */
+  --k1:#2F6FDE; --k2:#D97000; --k3:#2E8B57; --k4:#8E44AD; --k5:#C2185B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;color:var(--text);font:17.5px/1.6 "Nunito",system-ui,sans-serif;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px}
+.page{max-width:900px;margin:0 auto;padding:24px 18px 80px 62px;position:relative}
+.page::before{content:"";position:absolute;top:0;bottom:0;left:40px;width:2px;background:var(--pencil);opacity:.55}
+h1,h2{font-family:"Caveat",cursive;color:var(--ink);font-weight:700;line-height:1.1;margin:0}
+h1{font-size:58px}
+h2{font-size:44px;margin:6px 0 4px}
+h3{font-size:21px;margin:0 0 6px;font-weight:800;color:var(--ink)}
+h4{font-size:17px;margin:12px 0 4px;font-weight:800}
+p{margin:.45em 0;max-width:66ch}
+ul,ol{margin:.4em 0;padding-left:1.3em}
+li{margin:.15em 0}
+button,input{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:4px}
+b,strong{font-weight:800}
+
+/* nawigacja */
+.menu{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.menu button{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:5px 14px;font-weight:800;font-size:15.5px}
+.menu button[aria-current="true"]{background:var(--ink);color:#fff}
+.menu .st{color:#E0A800;margin-left:4px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.btn{border:2px solid var(--ink);background:var(--ink);color:#fff;border-radius:8px;padding:6px 16px;font-weight:800}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn.sm{padding:3px 10px;font-size:14.5px}
+.btn:disabled{opacity:.35;cursor:default}
+
+/* zakładki */
+.tab{display:none}
+.tab.on{display:block}
+.attn{background:#fff;border:2px dashed var(--pencil);border-radius:8px;padding:8px 14px;margin:8px 0 18px;max-width:66ch}
+.attn b{color:var(--pencil)}
+
+/* bloki teorii */
+.th{background:#fff;border:2px solid var(--ink);border-left-width:8px;border-radius:8px;padding:14px 16px;margin:18px 0;box-shadow:4px 4px 0 rgba(31,58,147,.10);scroll-margin-top:14px;position:relative}
+.th.flash{animation:flash 1.6s}
+@keyframes flash{0%,60%{box-shadow:0 0 0 6px #FFE066}100%{box-shadow:4px 4px 0 rgba(31,58,147,.10)}}
+.th > .spk{position:absolute;top:10px;right:10px}
+.th h3{padding-right:120px}
+.c1{border-left-color:var(--l1)} .c2{border-left-color:var(--l2)} .c3{border-left-color:var(--l3)} .c4{border-left-color:var(--l4)}
+.spk{border:2px solid var(--muted);background:#fff;color:var(--muted);border-radius:999px;padding:2px 10px;font-size:14px;font-weight:800}
+.spk.on{border-color:var(--pencil);color:var(--pencil)}
+.fact{background:#FFFBE6;border-left:4px solid #E0B400;padding:8px 12px;margin:10px 0;border-radius:4px;max-width:66ch}
+.fact::before{content:"Czy wiesz, że… ";font-weight:800;color:#9A7400}
+.trick{background:#F2E6F8;border-left:4px solid var(--l4);padding:8px 12px;margin:10px 0;border-radius:4px;max-width:66ch}
+.trick::before{content:"Sposób na zapamiętanie: ";font-weight:800;color:var(--l4)}
+.most{background:#fff;border:3px solid var(--pencil);border-radius:10px;padding:12px 16px;margin:22px 0;position:relative;scroll-margin-top:14px}
+.most > .spk{position:absolute;top:10px;right:10px}
+.most h3{color:var(--pencil)}
+.think{background:#FFF;border:2px solid var(--pencil);border-radius:8px;padding:8px 12px;margin:10px 0;max-width:66ch}
+.think::before{content:"? Zastanów się: ";font-weight:800;color:var(--pencil)}
+details.ans{margin-top:6px}
+details.ans summary{cursor:pointer;font-weight:800;color:var(--ink)}
+details.ans div{background:#EEF8F2;border-radius:6px;padding:8px 12px;margin-top:6px}
+
+/* kolorowe listy / tagi */
+.num3{list-style:none;padding:0;counter-reset:n}
+.num3 li{counter-increment:n;position:relative;padding:6px 8px 6px 44px;border-radius:8px;margin:6px 0}
+.num3 li::before{content:counter(n);position:absolute;left:8px;top:6px;width:28px;height:28px;border-radius:50%;color:#fff;text-align:center;font:700 22px/28px "Caveat",cursive}
+.num3 li:nth-child(1){background:var(--l1b)} .num3 li:nth-child(1)::before{background:var(--l1)}
+.num3 li:nth-child(2){background:var(--l2b)} .num3 li:nth-child(2)::before{background:var(--l2)}
+.num3 li:nth-child(3){background:var(--l3b)} .num3 li:nth-child(3)::before{background:var(--l3)}
+.num3 li:nth-child(4){background:var(--l4b)} .num3 li:nth-child(4)::before{background:var(--l4)}
+.tag{display:inline-block;border-radius:999px;padding:0 10px;font-weight:800;font-size:15px;color:#fff}
+.t-nab{background:var(--nab)} .t-mie{background:var(--mie)} .t-ner{background:var(--ner)} .t-lac{background:var(--lac)}
+.nab{color:var(--nab)} .mie{color:var(--mie)} .ner{color:#A87200} .lac{color:var(--lac)}
+
+/* tabele */
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:15.5px;min-width:520px}
+th,td{border:1.5px solid #C9D3DE;padding:7px 9px;vertical-align:top;text-align:left}
+thead th{background:#F1F4F8;color:var(--ink)}
+tbody th{background:#FAFBFD;font-weight:800;width:22%}
+td.y{color:var(--ok);font-weight:800;text-align:center} td.n{color:var(--pencil);font-weight:800;text-align:center}
+
+/* poziomy organizacji */
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:12px 0}
+.chain .lv{flex:1 1 140px;border-radius:10px;padding:10px;color:#fff;position:relative;min-width:130px}
+.chain .lv b{display:block;font:700 26px/1 "Caveat",cursive;margin-bottom:4px}
+.chain .lv span{font-size:14.5px;line-height:1.35;display:block}
+.chain .ar{align-self:center;font:700 26px "Caveat",cursive;color:var(--muted)}
+.lv1{background:var(--k1)} .lv2{background:var(--k2)} .lv3{background:var(--k3)} .lv4{background:var(--k4)} .lv5{background:var(--k5)}
+.lvlist{list-style:none;padding:0}
+.lvlist li{border-left:6px solid;padding:6px 10px;margin:8px 0;background:#fff;border-radius:4px}
+
+/* dwie kolumny */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}
+.box{border:2px solid;border-radius:10px;padding:10px 14px;background:#fff}
+.box h4{margin-top:0}
+.bx1{border-color:var(--l1)} .bx1 h4{color:var(--l1)}
+.bx2{border-color:var(--l2)} .bx2 h4{color:var(--l2)}
+
+/* karty grup */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:10px 0}
+.gcard{background:#fff;border:2px solid;border-radius:10px;padding:8px 12px}
+.gcard > b{display:block;font:700 25px/1.1 "Caveat",cursive}
+.gcard > i{font-style:normal;font-size:13.5px;font-weight:800;border-radius:999px;padding:0 8px;display:inline-block;margin:2px 0 4px}
+.gcard p{font-size:15px;margin:0;line-height:1.4}
+.kr{border-color:var(--l1)} .kr > b{color:var(--l1)} .kr > i{background:var(--l1b);color:var(--l1)}
+.bk{border-color:var(--l2)} .bk > b{color:var(--l2)} .bk > i{background:var(--l2b);color:var(--l2)}
+.pct{display:flex;height:34px;border-radius:8px;overflow:hidden;border:2px solid var(--ink);margin:8px 0 4px;max-width:600px}
+.pct div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;white-space:nowrap}
+
+/* rysunki */
+.fig{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start;margin:10px 0}
+.fig svg{width:100%;height:auto;display:block;background:#fff;border:2px solid #C9D3DE;border-radius:10px}
+.part{cursor:pointer;transition:filter .15s}
+.part:hover{filter:brightness(1.08) drop-shadow(0 0 3px #FFD43B)}
+.part.sel{filter:drop-shadow(0 0 5px #FFB400) drop-shadow(0 0 2px #FFB400)}
+.info{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:10px 14px;min-height:120px}
+.info b{color:var(--ink);font-size:18px}
+.lbl{font:700 15px "Nunito",sans-serif;fill:#1F3A93;pointer-events:none}
+.lbls.off{display:none}
+.findbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.findq{font-weight:800}
+.msg{font-weight:800;min-height:1.4em;margin-top:6px}
+.msg.ok{color:var(--ok)} .msg.no{color:var(--pencil)}
+
+/* kształty nabłonków */
+.shapes{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}
+.shapes figure{margin:0;background:#fff;border:2px solid var(--nab);border-radius:10px;padding:8px;text-align:center;flex:1 1 150px}
+.shapes figcaption{font-weight:800;color:var(--nab);font-size:15px}
+
+/* gry */
+.game{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:14px 16px;margin:22px 0;box-shadow:4px 4px 0 rgba(31,58,147,.12)}
+.game h3::before{content:"🎯 "}
+.gq{font:700 34px/1.15 "Caveat",cursive;color:var(--ink);margin:6px 0 2px}
+.gsub{color:var(--muted);font-size:15px}
+.gopts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.gopts .grp{flex-basis:100%;font-size:14px;font-weight:800;color:var(--muted);margin-top:4px}
+.gopts button{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:8px;padding:5px 12px;font-weight:700}
+.gopts button.right{background:var(--ok);border-color:var(--ok);color:#fff}
+.gopts button.wrong{border-color:var(--pencil);color:var(--pencil);text-decoration:line-through}
+.gbar{height:10px;background:#E6EBF2;border-radius:999px;overflow:hidden;margin:6px 0}
+.gbar div{height:100%;background:var(--ok);transition:width .3s}
+.order{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.slot{min-width:130px;min-height:46px;border:2px dashed #B8C3D6;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+.chip{border:none;border-radius:10px;padding:10px 14px;font-weight:800;color:#fff}
+.chip.used{visibility:hidden}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* quiz */
+.quiz{margin-top:24px}
+.qhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.score{font:700 30px "Caveat",cursive;color:var(--ink)}
+.q{background:#fff;border:2px solid #C9D3DE;border-radius:10px;padding:10px 14px;margin:10px 0}
+.q.done{border-color:var(--ok)}
+.q h4{margin:0 0 4px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.q .opts button{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:8px;padding:5px 12px;font-weight:700;text-align:left}
+.q .opts button.right{background:var(--ok);border-color:var(--ok);color:#fff}
+.q .opts button.wrong{border-color:var(--pencil);color:var(--pencil);text-decoration:line-through}
+.why{margin-top:6px;font-size:15.5px}
+.why.r{color:var(--ok)} .why.w{color:var(--pencil)}
+.why a{color:var(--ink);font-weight:800;margin-left:6px;cursor:pointer;text-decoration:underline}
+
+/* fiszki */
+.fbar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.fc{perspective:900px;height:150px;border:none;background:none;padding:0}
+.fc .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .fa,.fc .fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:10px;text-align:center;border:2px solid}
+.fc .fa{background:#fff;font:700 27px/1.1 "Caveat",cursive;color:var(--ink);border-color:var(--ink)}
+.fc .fb{background:#FFFBEA;transform:rotateY(180deg);font-size:14.5px;line-height:1.35;border-color:#E0B400;color:var(--text)}
+
+/* drzewka podsumowania */
+.tree{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px 0}
+.tree .root{background:#F7C66B;border-radius:8px;padding:6px 20px;font-weight:800}
+.tree .kids{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.tree .kid{border:2px solid #E7B04D;border-radius:8px;padding:6px 12px;background:#FFF7E6;text-align:center;font-size:15px}
+.tree .kid b{display:block}
+
+footer{margin-top:50px;font-size:14px;color:var(--muted)}
+
+@media (max-width:640px){
+  .tw::before{content:"Tabela jest szeroka: przesuń ją palcem w bok →";display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+  tbody th,thead th:first-child{position:sticky;left:0;z-index:1}
+  .page{padding:18px 12px 60px 32px} .page::before{left:20px}
+  h1{font-size:44px} h2{font-size:36px}
+  .two,.fig{grid-template-columns:1fr}
+  .th h3{padding-right:0;margin-top:30px}
+  .chain .ar{display:none}
+}
+
+/* WYDRUK: sama ściąga, wszystkie tematy */
+@media print{
+  body{background:#fff;font-size:12.5px}
+  .page{padding:0;max-width:none} .page::before{display:none}
+  .menu,.tools,.game,.quiz,.spk,.findbar,.msg,.findq,.fgrid,.fbar,footer,.noprint{display:none!important}
+  .tab{display:block!important}
+  .th,.most{box-shadow:none;break-inside:auto;margin:6px 0;padding:6px 10px;border-width:1.5px}
+  .th h3,.most h3,h4{break-after:avoid}
+  table,.chain,.cards,.shapes,.fig,.two{break-inside:avoid}
+  table{font-size:11px;min-width:0} th,td{padding:3px 5px}
+  .fig svg{max-width:300px} #tubeSvg{max-width:150px!important} #neuSvg{max-width:520px}
+  .info{min-height:0}
+  .chain .lv{padding:5px 8px} .chain .lv b{font-size:19px}
+  .gcard{padding:4px 8px} .gcard > b{font-size:19px} .gcard p{font-size:11px}
+  .fact,.trick,.think{margin:5px 0;padding:4px 8px}
+  details.ans div{display:block}
+  details.ans:not([open]) > div{display:block}
+  h1{font-size:34px} h2{font-size:30px;break-before:page}
+  .tab:first-of-type h2{break-before:auto}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <h1>Świat zwierząt</h1>
+  <p>Ściąga z biologii: <b>1.</b> W królestwie zwierząt, <b>2.</b> Tkanki: nabłonkowa, mięśniowa i nerwowa, <b>3.</b> Tkanka łączna. Przy każdym temacie jest ściąga, rysunki do klikania, gry i quiz. Gwiazdka ★ przy temacie oznacza zdany quiz.</p>
+  <nav class="menu" id="menu" aria-label="Tematy"></nav>
+  <div class="tools">
+    <button class="btn ghost sm" type="button" onclick="window.print()">🖨 Wydrukuj ściągę (wszystkie tematy)</button>
+  </div>
+
+<!-- =================================================================== TEMAT 1 -->
+<section class="tab" id="t1" data-name="1. Królestwo zwierząt">
+  <h2>1. W królestwie zwierząt</h2>
+  <div class="attn"><b>Zwróć uwagę na:</b> wspólne cechy zwierząt · poziomy organizacji ciała (tkanki, narządy, układy narządów) · podział na kręgowce i bezkręgowce.</div>
+
+  <article class="th c1" id="l1-wstep">
+    <h3>Królestwo zwierząt</h3>
+    <p>Zwierzęta to <b>najliczniejsze i najbardziej zróżnicowane królestwo</b> organizmów. Naukowcy opisali już <b>ponad milion gatunków</b>, ale uważają, że jest ich znacznie więcej.</p>
+    <p>Zwierzęta żyją niemal we wszystkich środowiskach, w wodzie i na lądzie. Dlatego bardzo różnią się budową i trybem życia.</p>
+    <div class="fact">titi rudobrody to niewielka małpa z lasów Ameryki Południowej. Ten gatunek odkryto dopiero w 2010 roku.</div>
+  </article>
+
+  <article class="th c1" id="l1-cechy">
+    <h3>Trzy cechy wspólne wszystkich zwierząt</h3>
+    <ol class="num3">
+      <li>Są organizmami <b>wielokomórkowymi</b>: ich ciało składa się z wielu komórek.</li>
+      <li>Ich komórki mają <b>jądro komórkowe</b>, ale w odróżnieniu od komórek roślinnych <b>nie mają chloroplastów ani ściany komórkowej</b>.</li>
+      <li>Są organizmami <b>cudzożywnymi</b>: nie mają chloroplastów, więc nie potrafią same wytwarzać pokarmu i muszą go zdobywać.</li>
+    </ol>
+    <div class="tw"><table>
+      <thead><tr><th>Element komórki</th><th>Komórka zwierzęca</th><th>Komórka roślinna</th></tr></thead>
+      <tbody>
+        <tr><th>jądro komórkowe</th><td class="y">✓ jest</td><td class="y">✓ jest</td></tr>
+        <tr><th>błona komórkowa</th><td class="y">✓ jest</td><td class="y">✓ jest</td></tr>
+        <tr><th>chloroplasty</th><td class="n">✗ brak</td><td class="y">✓ są</td></tr>
+        <tr><th>ściana komórkowa</th><td class="n">✗ brak</td><td class="y">✓ jest</td></tr>
+      </tbody></table></div>
+    <div class="trick">zwierzę nie ma „zielonych” chloroplastów, więc nie zrobi sobie jedzenia samo. Musi jeść, dlatego jest <b>cudzożywne</b>.</div>
+  </article>
+
+  <article class="th c1" id="l1-komorka">
+    <h3>Jak wygląda komórka zwierzęca?</h3>
+    <p>Wnętrze komórki zwierzęcej zajmują <b>cytoplazma</b> oraz <b>jądro komórkowe</b>, które jest duże i najczęściej kuliste.</p>
+    <p><b>Cytoplazma</b> = <b>cytozol</b> (galaretowata substancja) + pozostałe składniki komórki, między innymi <b>mitochondria, rybosomy i wakuole</b>.</p>
+    <p>Najbardziej zewnętrzną częścią komórki jest <b>błona komórkowa</b>.</p>
+    <p class="noprint"><b>Kliknij część komórki</b> na rysunku, żeby zobaczyć, co to jest.</p>
+    <div class="fig">
+      <svg id="cellSvg" viewBox="0 0 440 318" role="img" aria-label="Rysunek komórki zwierzęcej">
+        <ellipse class="part" data-p="cytozol" cx="220" cy="150" rx="200" ry="130" fill="#CFE6F7"/>
+        <ellipse class="part" data-p="blona" cx="220" cy="150" rx="200" ry="130" fill="none" stroke="#2F6FDE" stroke-width="10"/>
+        <g class="part" data-p="jadro">
+          <circle cx="205" cy="148" r="58" fill="#B98AD8" stroke="#7B3FA8" stroke-width="4"/>
+          <circle cx="215" cy="140" r="17" fill="#7B3FA8"/>
+        </g>
+        <g class="part" data-p="mito">
+          <g transform="translate(330,190) rotate(-25)"><ellipse rx="30" ry="14" fill="#F4A340" stroke="#C26A00" stroke-width="3"/><path d="M-22 0 q5 -9 10 0 t10 0 t10 0 t10 0" fill="none" stroke="#C26A00" stroke-width="2.5"/></g>
+          <g transform="translate(95,95) rotate(30)"><ellipse rx="26" ry="12" fill="#F4A340" stroke="#C26A00" stroke-width="3"/><path d="M-18 0 q4 -8 9 0 t9 0 t9 0 t9 0" fill="none" stroke="#C26A00" stroke-width="2.5"/></g>
+          <g transform="translate(130,220) rotate(-10)"><ellipse rx="24" ry="11" fill="#F4A340" stroke="#C26A00" stroke-width="3"/><path d="M-16 0 q4 -7 8 0 t8 0 t8 0 t8 0" fill="none" stroke="#C26A00" stroke-width="2.5"/></g>
+        </g>
+        <g class="part" data-p="ryb" fill="#333">
+          <circle cx="300" cy="90" r="5"/><circle cx="318" cy="104" r="5"/><circle cx="286" cy="112" r="5"/><circle cx="355" cy="130" r="5"/>
+          <circle cx="80" cy="160" r="5"/><circle cx="96" cy="178" r="5"/><circle cx="260" cy="232" r="5"/><circle cx="280" cy="246" r="5"/>
+          <circle cx="160" cy="60" r="5"/><circle cx="178" cy="52" r="5"/><circle cx="380" cy="170" r="5"/><circle cx="210" cy="250" r="5"/>
+        </g>
+        <g class="part" data-p="wak">
+          <circle cx="345" cy="78" r="20" fill="#F2F8FF" stroke="#7FA7D9" stroke-width="3"/>
+          <circle cx="62" cy="128" r="13" fill="#F2F8FF" stroke="#7FA7D9" stroke-width="3"/>
+        </g>
+        <g class="lbls" id="cellLbls">
+          <text class="lbl" x="178" y="128">jądro</text>
+          <text class="lbl" x="300" y="228">mitochondrium</text>
+          <text class="lbl" x="372" y="62">wakuola</text>
+          <text class="lbl" x="268" y="80">rybosomy</text>
+          <text class="lbl" x="150" y="310" style="fill:#2F6FDE">błona komórkowa</text>
+          <text class="lbl" x="40" y="205">cytozol</text>
+        </g>
+      </svg>
+      <div>
+        <div class="info" id="cellInfo" aria-live="polite"><b>Kliknij część komórki</b><br>Tu pojawi się opis.</div>
+        <div class="findbar noprint">
+          <button class="btn sm" type="button" id="cellFind">Zagraj: znajdź na rysunku</button>
+          <button class="btn ghost sm" type="button" id="cellLblBtn">Ukryj podpisy</button>
+        </div>
+        <div class="findq" id="cellQ"></div>
+        <div class="msg" id="cellMsg" aria-live="polite"></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="th c1" id="l1-poziomy">
+    <h3>Poziomy organizacji ciała zwierząt</h3>
+    <p>Organizmy zwierząt są zbudowane z wielu komórek, które różnią się kształtem, rozmiarami i szczegółami budowy. <b>Komórki tego samego rodzaju</b> są skupione w <b>tkanki</b>. Tkanki wchodzą w skład <b>narządów</b>, a narządy tworzą <b>układy narządów</b>.</p>
+    <div class="chain">
+      <div class="lv lv1"><b>komórka</b><span>komórka mięśniowa serca</span></div><div class="ar">→</div>
+      <div class="lv lv2"><b>tkanka</b><span>tkanka mięśniowa serca</span></div><div class="ar">→</div>
+      <div class="lv lv3"><b>narząd</b><span>serce</span></div><div class="ar">→</div>
+      <div class="lv lv4"><b>układ narządów</b><span>układ krwionośny</span></div><div class="ar">→</div>
+      <div class="lv lv5"><b>organizm</b><span>lwica</span></div>
+    </div>
+    <ul class="lvlist">
+      <li style="border-color:var(--k1)"><b style="color:var(--k1)">Komórka</b> jest podstawowym elementem organizmu. Komórki różnią się budową i właściwościami. Na przykład wydłużone, rozgałęzione komórki mięśniowe serca potrafią się kurczyć i rozkurczać.</li>
+      <li style="border-color:var(--k2)"><b style="color:var(--k2)">Tkanka</b> to grupa komórek o podobnej budowie, które wykonują określone zadania. Na przykład komórki mięśniowe serca tworzą tkankę mięśniową, z której zbudowane są ściany serca.</li>
+      <li style="border-color:var(--k3)"><b style="color:var(--k3)">Narząd</b> składa się z różnych rodzajów tkanek, które mają różne zadania. W sercu tkanka mięśniowa buduje ściany, tkanka nabłonkowa wyściela wnętrze, a tkanka nerwowa kontroluje jego pracę.</li>
+      <li style="border-color:var(--k4)"><b style="color:var(--k4)">Układ narządów</b> to narządy, które razem wykonują określone czynności życiowe. Serce wraz z naczyniami krwionośnymi tworzy układ krwionośny.</li>
+      <li style="border-color:var(--k5)"><b style="color:var(--k5)">Organizm</b> to współpracujące ze sobą układy narządów. Poza układem krwionośnym są to między innymi układy: oddechowy, pokarmowy, nerwowy i szkieletowy.</li>
+    </ul>
+    <div class="trick"><b>K</b>asia <b>T</b>ańczy <b>N</b>a <b>U</b>licy <b>O</b>grodowej → <b>K</b>omórka, <b>T</b>kanka, <b>N</b>arząd, <b>U</b>kład narządów, <b>O</b>rganizm.</div>
+  </article>
+
+  <div class="game" id="gLevels">
+    <h3>Ułóż poziomy po kolei</h3>
+    <p class="gsub">Klikaj od najmniejszego do największego.</p>
+    <div class="order" id="lvSlots"></div>
+    <div class="order" id="lvChips"></div>
+    <div class="msg" id="lvMsg" aria-live="polite"></div>
+    <button class="btn ghost sm" type="button" id="lvReset">Jeszcze raz</button>
+  </div>
+
+  <article class="th c1" id="l1-grupy">
+    <h3>Dwie grupy zwierząt: kręgowce i bezkręgowce</h3>
+    <p>Zwierzęta dzielimy na dwie duże grupy. O podziale decyduje to, <b>czy zwierzę ma sztywny szkielet wewnętrzny</b>.</p>
+    <div class="two">
+      <div class="box bx1">
+        <h4>Kręgowce (zwierzęta kręgowe)</h4>
+        <ul>
+          <li>Mają <b>sztywny szkielet wewnętrzny</b>.</li>
+          <li>Jego najważniejsze części to <b>czaszka</b> i <b>kręgosłup</b>.</li>
+          <li>Kręgosłup składa się z mniejszych elementów, <b>kręgów</b>, i stąd nazwa <b>kręgowce</b>.</li>
+          <li>Należą do nich: <b>ryby, płazy, gady, ptaki i ssaki</b>.</li>
+        </ul>
+        <p>Szkielet wewnętrzny <b>chroni narządy</b>, jest <b>rusztowaniem ciała</b> i <b>nadaje mu kształt</b>. Razem z mięśniami tworzy <b>aparat ruchu</b>.</p>
+      </div>
+      <div class="box bx2">
+        <h4>Bezkręgowce (zwierzęta bezkręgowe)</h4>
+        <ul>
+          <li><b>Nie mają sztywnego szkieletu wewnętrznego.</b></li>
+          <li>Niektóre mają ciało niczym nieosłonięte, na przykład <b>dżdżownice i pijawki</b>.</li>
+          <li>Inne mają ciało okryte <b>pancerzem</b> (na przykład <b>raki</b>) albo <b>muszlą</b> (większość <b>ślimaków</b>).</li>
+          <li>Należą do nich: <b>parzydełkowce, płazińce, nicienie, pierścienice, stawonogi i mięczaki</b>.</li>
+        </ul>
+        <p><b>Pancerz</b> to rodzaj <b>szkieletu zewnętrznego</b>. Chroni miękkie i delikatne ciało, a od środka są do niego przyczepione mięśnie.</p>
+      </div>
+    </div>
+    <div class="think">dlaczego bezkręgowce są na ogół mniejsze niż kręgowce?
+      <details class="ans"><summary>Pokaż odpowiedź</summary><div>Bezkręgowce nie mają sztywnego szkieletu wewnętrznego, który byłby rusztowaniem i podtrzymywał duże, ciężkie ciało. Pancerz albo muszla przy dużym ciele byłyby bardzo ciężkie i utrudniałyby ruch.</div></details></div>
+  </article>
+
+  <article class="th c1" id="l1-krolestwo">
+    <h3>Grupy zwierząt: po czym je poznać?</h3>
+    <p><b>Niemal 95%</b> wszystkich żyjących obecnie gatunków zwierząt to <b>bezkręgowce</b>. Pozostałe to kręgowce, a wśród nich najliczniejszą grupą są <b>ryby</b>.</p>
+    <div class="pct" aria-label="Bezkręgowce około 95 procent, kręgowce około 5 procent"><div style="width:95%;background:var(--l2)">bezkręgowce, niemal 95%</div><div style="width:5%;background:var(--l1)"></div></div>
+    <p class="gsub">Niebieski pasek na końcu to kręgowce, około 5%.</p>
+    <h4 style="color:var(--l1)">Zwierzęta kręgowe</h4>
+    <div class="cards">
+      <div class="gcard kr"><b>Ryby</b><i>np. błazenek</i><p>Zwykle <b>opływowy kształt ciała</b>, mają <b>płetwy</b>. Ich skóra wytwarza <b>łuski</b>.</p></div>
+      <div class="gcard kr"><b>Płazy</b><i>np. kumak</i><p><b>Cienka, stale wilgotna skóra</b>. Jest <b>naga</b>, czyli niepokryta łuskami.</p></div>
+      <div class="gcard kr"><b>Gady</b><i>np. pyton</i><p><b>Gruba i sucha skóra</b>, pokryta licznymi <b>łuskami i tarczkami</b>.</p></div>
+      <div class="gcard kr"><b>Ptaki</b><i>np. sójka</i><p>Kończyny przednie przekształcone w <b>skrzydła</b>. Z ich skóry wyrastają <b>pióra</b>.</p></div>
+      <div class="gcard kr"><b>Ssaki</b><i>np. lew</i><p><b>Karmią potomstwo mlekiem</b>. Ich cechą charakterystyczną są <b>włosy</b>.</p></div>
+    </div>
+    <h4 style="color:var(--l2)">Zwierzęta bezkręgowe</h4>
+    <div class="cards">
+      <div class="gcard bk"><b>Parzydełkowce</b><i>np. chełbia</i><p>Mają <b>komórki z parzącym płynem</b>, które pomagają im polować i się bronić.</p></div>
+      <div class="gcard bk"><b>Płazińce</b><i>np. tasiemiec</i><p>W większości <b>pasożyty</b>. Ciało <b>wydłużone i silnie spłaszczone</b>.</p></div>
+      <div class="gcard bk"><b>Nicienie</b><i>np. glista</i><p>Na ogół <b>pasożyty</b>. Ciało <b>długie, nitkowate, zwężone na końcach</b>.</p></div>
+      <div class="gcard bk"><b>Pierścienice</b><i>np. dżdżownica</i><p>Ciało podzielone na części: <b>pierścienie (segmenty)</b>.</p></div>
+      <div class="gcard bk"><b>Stawonogi</b><i>np. motyl monarcha</i><p>Charakterystyczne <b>odnóża z odcinków połączonych stawami</b>.</p></div>
+      <div class="gcard bk"><b>Mięczaki</b><i>np. ślimak wstężyk</i><p><b>Delikatne, miękkie ciało</b>, u niektórych okryte <b>muszlą</b>.</p></div>
+    </div>
+    <div class="trick">pięć grup kręgowców w kolejności z podręcznika: <b>Ryby → Płazy → Gady → Ptaki → Ssaki</b>. Ryby mają łuski, płazy mają gołą, mokrą skórę, gady suchą z łuskami, ptaki pióra, ssaki włosy. Pierścienice mają w nazwie „pierścienie”, a stawonogi mają „stawy w nogach”.</div>
+  </article>
+
+  <div class="game" id="gAnimals"></div>
+  <div class="game" id="gFeatures"></div>
+
+  <article class="th c1" id="l1-gabki">
+    <h3>Gąbki: zwierzęta inne niż wszystkie</h3>
+    <ul>
+      <li>Żyją w różnych środowiskach wodnych, najczęściej w <b>morzach i oceanach</b>.</li>
+      <li>Są <b>jedynymi zwierzętami, które nie mają tkanek, narządów ani układów narządów</b>.</li>
+      <li>Ich ciało składa się z <b>kilkunastu typów komórek</b>, a każda komórka może przekształcić się w komórkę innego typu.</li>
+      <li>Dzięki temu mają <b>niezwykłe zdolności regeneracyjne</b>: potrafią odbudować cały organizm nawet z mikroskopijnych fragmentów ciała.</li>
+      <li>Żyją <b>przytwierdzone do dna</b> zbiornika albo do przedmiotów zanurzonych w wodzie.</li>
+      <li>Większość gąbek wytwarza <b>szkielet</b>. Niektóre takie szkielety są używane jako <b>gąbki kąpielowe</b>.</li>
+    </ul>
+  </article>
+
+  <div class="most" id="l1-most">
+    <h3>To najważniejsze!</h3>
+    <ul>
+      <li>Zwierzęta są <b>cudzożywnymi organizmami wielokomórkowymi</b>. Ich ciała są zbudowane z komórek, które mają jądro komórkowe.</li>
+      <li>Komórki budujące organizmy zwierząt są skupione w <b>tkanki</b>, które wchodzą w skład <b>narządów</b>, a te tworzą <b>układy narządów</b>.</li>
+      <li><b>Zwierzęta kręgowe</b> mają sztywny szkielet wewnętrzny, którego główne części to <b>czaszka i kręgosłup</b>.</li>
+      <li><b>Zwierzęta bezkręgowe</b> nie mają sztywnego szkieletu wewnętrznego. Ich ciała są nagie albo osłonięte <b>muszlą lub pancerzem</b>.</li>
+    </ul>
+  </div>
+
+  <article class="th c1" id="l1-cw">
+    <h3>Ćwiczenia z podręcznika (z odpowiedziami)</h3>
+    <p><b>1. Podaj trzy cechy, dzięki którym można zaliczyć organizm do królestwa zwierząt.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Jest wielokomórkowy. Jego komórki mają jądro komórkowe, ale nie mają chloroplastów ani ściany komórkowej. Jest cudzożywny, czyli nie wytwarza sam pokarmu.</div></details>
+    <p><b>2. Przedstaw kolejne poziomy organizacji ciała zwierząt.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Komórka → tkanka → narząd → układ narządów → organizm. Przykład: komórka mięśniowa serca → tkanka mięśniowa serca → serce → układ krwionośny → lwica.</div></details>
+    <p><b>3. Wyjaśnij, na podstawie jakiej cechy dzielimy zwierzęta na kręgowce i bezkręgowce.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Na podstawie tego, czy mają sztywny szkielet wewnętrzny z czaszką i kręgosłupem. Kręgowce go mają, bezkręgowce nie.</div></details>
+  </article>
+
+  <div class="quiz" id="q1"></div>
+</section>
+
+<!-- =================================================================== TEMAT 2 -->
+<section class="tab" id="t2" data-name="2. Tkanki">
+  <h2>2. Tkanki: nabłonkowa, mięśniowa i nerwowa</h2>
+  <div class="attn"><b>Zwróć uwagę na:</b> rodzaje tkanek zwierzęcych · budowę i funkcje nabłonków · budowę i sposób pracy tkanki mięśniowej · elementy budowy i funkcje komórek nerwowych.</div>
+
+  <article class="th c2" id="l2-rodzaje">
+    <h3>Jakie tkanki występują u zwierząt?</h3>
+    <p>U większości zwierząt komórki łączą się w <b>tkanki</b>. Każda tkanka jest przystosowana do określonych zadań, dzięki czemu cały organizm działa prawidłowo. Różne rodzaje tkanek wchodzą w skład narządów wewnętrznych.</p>
+    <p>Ciała zwierząt są zbudowane z <b>czterech rodzajów tkanek</b>:</p>
+    <div class="cards">
+      <div class="gcard" style="border-color:var(--nab)"><b class="nab">nabłonkowa</b><p>Występuje na <b>powierzchni ciała</b> i <b>wyściela niektóre narządy wewnętrzne</b>.</p></div>
+      <div class="gcard" style="border-color:var(--mie)"><b class="mie">mięśniowa</b><p>Buduje różne mięśnie, między innymi te, które tworzą <b>ściany jelit i żołądka</b>. Umożliwia <b>ruch</b>.</p></div>
+      <div class="gcard" style="border-color:var(--ner)"><b class="ner">nerwowa</b><p>Podstawowy materiał budulcowy <b>układu nerwowego</b>, w tym <b>mózgowia</b>. Kontroluje pracę organizmu.</p></div>
+      <div class="gcard" style="border-color:var(--lac)"><b class="lac">łączna</b><p>Wchodzi w skład <b>większości narządów wewnętrznych</b>. Więcej o niej w temacie 3.</p></div>
+    </div>
+    <div class="trick">cztery tkanki to <b>N</b>abłonkowa, <b>M</b>ięśniowa, <b>N</b>erwowa i <b>Ł</b>ączna. Kolory na tej stronie się nie zmieniają: <span class="tag t-nab">nabłonkowa</span> <span class="tag t-mie">mięśniowa</span> <span class="tag t-ner">nerwowa</span> <span class="tag t-lac">łączna</span></div>
+  </article>
+
+  <article class="th c2" id="l2-nablonek" style="border-left-color:var(--nab)">
+    <h3><span class="nab">Tkanka nabłonkowa</span> (nabłonek)</h3>
+    <p><b>Budowa:</b> komórki <b>zawsze ściśle do siebie przylegają</b>. Są ułożone w <b>jednej, kilku lub kilkunastu warstwach</b>.</p>
+    <h4>Zadania nabłonków</h4>
+    <ol class="num3">
+      <li><b>Ochrona</b> ciała przed drobnymi uszkodzeniami i przed wnikaniem drobnoustrojów chorobotwórczych.</li>
+      <li><b>Wchłanianie</b> różnych substancji, między innymi składników pokarmowych oraz tlenu i dwutlenku węgla.</li>
+      <li><b>Wytwarzanie i wydzielanie</b> różnych substancji, na przykład enzymów trawiennych, mleka lub śluzu.</li>
+    </ol>
+    <h4>Podział nabłonków</h4>
+    <p><b>Według kształtu komórek:</b> płaskie, sześcienne i walcowate.</p>
+    <div class="shapes">
+      <figure><svg viewBox="0 0 160 60" width="150" aria-hidden="true">
+        <g fill="#F8D7C6" stroke="#B5694A" stroke-width="2"><rect x="5" y="30" width="50" height="16"/><rect x="55" y="30" width="50" height="16"/><rect x="105" y="30" width="50" height="16"/></g>
+        <g fill="#7B3FA8"><ellipse cx="30" cy="38" rx="7" ry="3"/><ellipse cx="80" cy="38" rx="7" ry="3"/><ellipse cx="130" cy="38" rx="7" ry="3"/></g></svg>
+        <figcaption>płaskie</figcaption></figure>
+      <figure><svg viewBox="0 0 160 60" width="150" aria-hidden="true">
+        <g fill="#F8D7C6" stroke="#B5694A" stroke-width="2"><rect x="8" y="12" width="36" height="36"/><rect x="44" y="12" width="36" height="36"/><rect x="80" y="12" width="36" height="36"/><rect x="116" y="12" width="36" height="36"/></g>
+        <g fill="#7B3FA8"><circle cx="26" cy="30" r="5"/><circle cx="62" cy="30" r="5"/><circle cx="98" cy="30" r="5"/><circle cx="134" cy="30" r="5"/></g></svg>
+        <figcaption>sześcienne</figcaption></figure>
+      <figure><svg viewBox="0 0 160 60" width="150" aria-hidden="true">
+        <g fill="#F8D7C6" stroke="#B5694A" stroke-width="2"><rect x="10" y="2" width="20" height="56"/><rect x="30" y="2" width="20" height="56"/><rect x="50" y="2" width="20" height="56"/><rect x="70" y="2" width="20" height="56"/><rect x="90" y="2" width="20" height="56"/><rect x="110" y="2" width="20" height="56"/><rect x="130" y="2" width="20" height="56"/></g>
+        <g fill="#7B3FA8"><ellipse cx="20" cy="46" rx="4" ry="6"/><ellipse cx="40" cy="46" rx="4" ry="6"/><ellipse cx="60" cy="46" rx="4" ry="6"/><ellipse cx="80" cy="46" rx="4" ry="6"/><ellipse cx="100" cy="46" rx="4" ry="6"/><ellipse cx="120" cy="46" rx="4" ry="6"/><ellipse cx="140" cy="46" rx="4" ry="6"/></g></svg>
+        <figcaption>walcowate</figcaption></figure>
+    </div>
+    <p><b>Według liczby warstw:</b></p>
+    <ul>
+      <li><b>jednowarstwowe</b> występują <b>u wszystkich zwierząt</b>,</li>
+      <li><b>wielowarstwowe</b> występują <b>wyłącznie u kręgowców</b>.</li>
+    </ul>
+    <div class="tw"><table>
+      <thead><tr><th>Nabłonek</th><th>Gdzie występuje?</th><th>Co robi?</th></tr></thead>
+      <tbody>
+        <tr><th>jednowarstwowy płaski</th><td>buduje ściany <b>pęcherzyków płucnych</b> (płuca)</td><td>umożliwia transport <b>tlenu i dwutlenku węgla</b> między wnętrzem pęcherzyka a krwią</td></tr>
+        <tr><th>jednowarstwowy sześcienny</th><td>w kanalikach budujących <b>nerki</b></td><td>umożliwia wchłanianie niektórych substancji (między innymi <b>glukozy</b>) z moczu do krwi</td></tr>
+        <tr><th>jednowarstwowy walcowaty</th><td>wyściela wnętrze <b>jelita cienkiego</b></td><td>transportuje substancje pokarmowe z jelita do krwi, wydziela <b>enzymy trawienne</b></td></tr>
+        <tr><th>wielowarstwowy płaski</th><td>tworzy <b>zewnętrzną warstwę skóry</b></td><td><b>chroni</b> przed uszkodzeniami oraz wnikaniem drobnoustrojów chorobotwórczych</td></tr>
+      </tbody></table></div>
+    <div class="fact">nabłonek, który wyściela wnętrze dróg oddechowych kręgowców, ma liczne <b>rzęski</b>. Usuwają one zanieczyszczenia z wdychanego powietrza.</div>
+    <div class="trick">jednowarstwowy nabłonek jest cienki, więc substancje łatwo przez niego przechodzą. Dlatego <b>wchłania i wydziela</b>. Wielowarstwowy jest gruby jak mur, więc <b>chroni</b>.</div>
+  </article>
+
+  <div class="game" id="gNab"></div>
+
+  <article class="th c2" id="l2-miesnie" style="border-left-color:var(--mie)">
+    <h3><span class="mie">Tkanka mięśniowa</span></h3>
+    <p>Tkanka mięśniowa jest zbudowana z elementów, które potrafią się <b>kurczyć i rozkurczać</b>. Dzięki temu zwierzęta mogą się <b>poruszać</b>, w ich jelitach <b>przesuwa się pokarm</b>, a w naczyniach krwionośnych <b>krąży krew</b>.</p>
+    <p>Ze względu na budowę i sposób pracy są <b>trzy rodzaje</b> tkanki mięśniowej. Tkankę gładką i tkankę serca budują <b>komórki</b>. Tkankę szkieletową budują <b>włókna</b>, które powstają z kilkudziesięciu połączonych ze sobą komórek.</p>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>gładka</th><th>poprzecznie prążkowana serca</th><th>poprzecznie prążkowana szkieletowa</th></tr></thead>
+      <tbody>
+        <tr><th>wygląd</th>
+          <td><svg viewBox="0 0 120 50" width="110" aria-hidden="true"><g fill="#F2A08F" stroke="#B5463A" stroke-width="1.5"><path d="M5 18 Q45 4 85 18 Q45 30 5 18Z"/><path d="M30 34 Q70 20 110 34 Q70 46 30 34Z"/></g><g fill="#7B3FA8"><ellipse cx="45" cy="18" rx="6" ry="3"/><ellipse cx="70" cy="34" rx="6" ry="3"/></g></svg></td>
+          <td><svg viewBox="0 0 120 50" width="110" aria-hidden="true"><g fill="#E8735E" stroke="#9E3326" stroke-width="1.5"><path d="M5 14 H60 L75 6 H115 V16 H78 L64 24 H5Z"/><path d="M5 30 H115 V42 H5Z"/></g><g stroke="#9E3326" stroke-width="1"><path d="M15 14v10M25 14v10M35 14v10M45 14v10M55 14v10M85 6v10M95 6v10M105 6v10M15 30v12M25 30v12M35 30v12M45 30v12M65 30v12M75 30v12M85 30v12M95 30v12M105 30v12"/></g><g fill="#7B3FA8"><ellipse cx="38" cy="19" rx="5" ry="3"/><ellipse cx="55" cy="36" rx="5" ry="3"/></g></svg></td>
+          <td><svg viewBox="0 0 120 50" width="110" aria-hidden="true"><g fill="#E25E4A" stroke="#9E3326" stroke-width="1.5"><rect x="3" y="6" width="114" height="16" rx="7"/><rect x="3" y="28" width="114" height="16" rx="7"/></g><g stroke="#9E3326" stroke-width="1"><path d="M12 6v16M20 6v16M28 6v16M36 6v16M44 6v16M52 6v16M60 6v16M68 6v16M76 6v16M84 6v16M92 6v16M100 6v16M108 6v16M12 28v16M20 28v16M28 28v16M36 28v16M44 28v16M52 28v16M60 28v16M68 28v16M76 28v16M84 28v16M92 28v16M100 28v16M108 28v16"/></g><g fill="#7B3FA8"><ellipse cx="24" cy="8" rx="5" ry="2"/><ellipse cx="62" cy="8" rx="5" ry="2"/><ellipse cx="96" cy="8" rx="5" ry="2"/><ellipse cx="42" cy="42" rx="5" ry="2"/><ellipse cx="82" cy="42" rx="5" ry="2"/></g></svg></td></tr>
+        <tr><th>gdzie występuje?</th><td>buduje ściany <b>narządów wewnętrznych</b>, między innymi <b>żołądka i jelit</b></td><td>buduje <b>ściany serca</b></td><td>buduje <b>mięśnie szkieletowe</b>, między innymi mięśnie kończyn</td></tr>
+        <tr><th>kształt</th><td>komórki <b>wrzecionowate, ostro zakończone</b></td><td>komórki <b>walcowate, rozgałęzione, tępo zakończone</b></td><td>włókna <b>walcowate, proste, tępo zakończone</b></td></tr>
+        <tr><th>jądra</th><td><b>jedno jądro</b> w środkowej części komórki</td><td><b>jedno lub dwa jądra</b> w środkowej części komórki</td><td><b>liczne jądra</b> przy powierzchni włókna</td></tr>
+        <tr><th>tempo skurczu</th><td>kurczy się <b>wolno</b></td><td>kurczy się <b>szybko</b></td><td>kurczy się <b>szybko</b></td></tr>
+        <tr><th>czy zależy od woli?</th><td>pracuje <b>niezależnie od woli</b></td><td>pracuje <b>niezależnie od woli</b></td><td>pracuje <b>zależnie od woli</b></td></tr>
+        <tr><th>prążki</th><td><b>brak</b> poprzecznego prążkowania</td><td>poprzecznie prążkowana</td><td>poprzecznie prążkowana</td></tr>
+      </tbody></table></div>
+    <div class="trick"><b>tylko szkieletowa słucha Twojej woli</b>: ruszasz ręką, kiedy chcesz. Gładka jest wolna i bez prążków. Serce ma rozgałęzione komórki i pracuje szybko, samo, przez całe życie.</div>
+    <div class="think">czy serce mogłoby dobrze pracować, gdyby było zbudowane z tkanki mięśniowej gładkiej?
+      <details class="ans"><summary>Pokaż odpowiedź</summary><div>Nie. Tkanka gładka kurczy się wolno, a serce musi kurczyć się szybko i bez przerwy, żeby pompować krew.</div></details></div>
+  </article>
+
+  <div class="game" id="gMie"></div>
+
+  <article class="th c2" id="l2-nerwowa" style="border-left-color:var(--ner)">
+    <h3><span class="ner">Tkanka nerwowa</span></h3>
+    <p>Tkanka nerwowa jest <b>głównym składnikiem układu nerwowego</b>. Przypomina gęstą sieć i <b>nieustannie analizuje informacje</b>, które odbiera ze wszystkich narządów wewnętrznych i ze środowiska zewnętrznego. Dzięki jej budowie i działaniu układ nerwowy doskonale <b>kontroluje pracę całego organizmu</b>.</p>
+    <p>Tkanka nerwowa składa się z:</p>
+    <ul>
+      <li><b>komórek nerwowych</b>, czyli <b>neuronów</b>. Ich zadaniem jest <b>odbieranie i przesyłanie informacji</b> w postaci <b>impulsu nerwowego</b>.</li>
+      <li><b>komórek glejowych</b> (glej). Wypełniają przestrzenie między komórkami nerwowymi, więc są dla nich <b>podporą</b>. Zapewniają im też <b>ochronę</b> i dostarczają <b>substancji odżywczych</b>.</li>
+    </ul>
+    <p><b>Impuls nerwowy</b> to sygnał, który przekazuje informacje w układzie nerwowym.</p>
+  </article>
+
+  <article class="th c2" id="l2-neuron" style="border-left-color:var(--ner)">
+    <h3>Jak jest zbudowana i jak działa komórka nerwowa?</h3>
+    <p>Komórka nerwowa składa się z <b>ciała komórki</b> oraz <b>wypustek</b>:</p>
+    <ul>
+      <li><b>Ciało komórki</b> zawiera wszystkie elementy komórki zwierzęcej, w tym <b>jądro komórkowe</b>.</li>
+      <li><b>Dendryty</b> to <b>krótkie, silnie rozgałęzione</b> wypustki. Przesyłają impuls nerwowy <b>do ciała komórki</b>.</li>
+      <li><b>Akson</b> to <b>pojedyncza, długa</b> wypustka, rozgałęziona zwykle na końcu. Przesyła impuls <b>z ciała komórki</b> do innej komórki, z którą tworzy połączenie.</li>
+      <li><b>Osłonka</b> zwykle otacza akson. <b>Chroni</b> go i <b>zwiększa szybkość</b> przesyłania impulsu.</li>
+    </ul>
+    <p class="noprint"><b>Kliknij część neuronu</b> albo naciśnij „Wyślij impuls”, żeby zobaczyć, którędy biegnie sygnał.</p>
+    <svg id="neuSvg" viewBox="0 0 720 230" role="img" aria-label="Rysunek komórki nerwowej" style="width:100%;height:auto;background:#fff;border:2px solid #C9D3DE;border-radius:10px">
+      <g class="part" data-p="dend" stroke="#E0A21A" stroke-width="6" fill="none" stroke-linecap="round">
+        <path d="M118 96 L70 50 L40 34 M70 50 L58 20"/>
+        <path d="M112 118 L60 120 L28 108 M60 120 L30 140"/>
+        <path d="M126 140 L96 186 L70 206 M96 186 L110 214"/>
+        <path d="M150 82 L152 36 L136 12 M152 36 L176 14"/>
+        <path d="M160 142 L182 190 L172 216"/>
+      </g>
+      <g class="part" data-p="cialo">
+        <circle cx="145" cy="112" r="38" fill="#F5C04A" stroke="#C98A00" stroke-width="4"/>
+        <circle cx="140" cy="108" r="12" fill="#7B3FA8"/>
+      </g>
+      <path class="part" data-p="akson" d="M182 112 C 270 60, 370 165, 470 112 S 590 92, 628 112" fill="none" stroke="#E0A21A" stroke-width="7"/>
+      <path class="part" data-p="oslonka" d="M215 95 C 285 62, 370 165, 470 112 S 570 98, 600 108" fill="none" stroke="#FBE3A0" stroke-width="18" stroke-dasharray="46 9" stroke-linecap="round" opacity=".95"/>
+      <g class="part" data-p="koniec" stroke="#E0A21A" stroke-width="5" fill="none" stroke-linecap="round">
+        <path d="M628 112 L668 84 L690 72 M668 84 L676 60"/>
+        <path d="M628 112 L672 118 L700 112"/>
+        <path d="M628 112 L660 150 L684 170 M660 150 L650 178"/>
+      </g>
+      <path id="impPath" d="M40 34 L70 50 L118 96 L145 112 L182 112 C 270 60, 370 165, 470 112 S 590 92, 628 112 L 672 118 L 700 112" fill="none" stroke="none"/>
+      <circle id="impDot" r="9" fill="#D2384B" opacity="0"/>
+      <g class="lbls" id="neuLbls">
+        <text class="lbl" x="6" y="80">dendryty</text>
+        <text class="lbl" x="110" y="172">ciało komórki</text>
+        <text class="lbl" x="390" y="185">akson</text>
+        <text class="lbl" x="250" y="52">osłonka</text>
+        <text class="lbl" x="575" y="200">zakończenia aksonu</text>
+      </g>
+    </svg>
+    <div class="info" id="neuInfo" aria-live="polite" style="margin-top:8px"><b>Kliknij część neuronu</b></div>
+    <div class="findbar noprint">
+      <button class="btn sm" type="button" id="impBtn">⚡ Wyślij impuls</button>
+      <button class="btn ghost sm" type="button" id="neuFind">Zagraj: znajdź na rysunku</button>
+      <button class="btn ghost sm" type="button" id="neuLblBtn">Ukryj podpisy</button>
+    </div>
+    <div class="findq" id="neuQ"></div>
+    <div class="msg" id="neuMsg" aria-live="polite"></div>
+    <div class="trick">impuls zawsze płynie w jedną stronę: <b>dendryty → ciało komórki → akson → następna komórka</b>. <b>D</b>endryty <b>D</b>ostarczają do ciała, <b>A</b>kson <b>A</b>dresuje dalej.</div>
+  </article>
+
+  <article class="th c2" id="l2-mikro">
+    <h3>Obserwacja tkanek pod mikroskopem</h3>
+    <p>Potrzebujesz mikroskopu i preparatów trwałych: tkanki mięśniowej gładkiej i poprzecznie prążkowanej, nabłonka jednowarstwowego i wielowarstwowego oraz tkanki nerwowej.</p>
+    <ul>
+      <li>Każdy preparat oglądaj najpierw przy <b>najmniejszym powiększeniu</b>, potem stopniowo je zwiększaj.</li>
+      <li>Preparaty są <b>barwione</b>, dzięki czemu komórki i tkanki lepiej widać.</li>
+      <li>Narysuj zaobserwowane tkanki i podpisz rozpoznane elementy.</li>
+    </ul>
+    <h4>Jak je rozpoznać?</h4>
+    <ul>
+      <li><span class="mie"><b>gładka</b></span>: wydłużone, wrzecionowate komórki, każda z jednym jądrem, bez prążków,</li>
+      <li><span class="mie"><b>szkieletowa</b></span>: długie, proste włókna z poprzecznymi prążkami i wieloma jądrami na brzegu,</li>
+      <li><span class="mie"><b>serca</b></span>: prążkowane komórki, które się rozgałęziają i łączą,</li>
+      <li><span class="nab"><b>nabłonek</b></span>: komórki ciasno obok siebie, w jednej albo w wielu warstwach,</li>
+      <li><span class="ner"><b>tkanka nerwowa</b></span>: komórki z wieloma wypustkami, połączone w sieć.</li>
+    </ul>
+  </article>
+
+  <article class="th c2" id="l2-lab">
+    <h3>Tkanki i narządy z laboratorium</h3>
+    <p>Od <b>ponad 50 lat</b> naukowcy starają się wyhodować ludzkie tkanki w laboratorium, poza organizmem człowieka. Najpierw udało się to z <b>tkankami skóry</b>, których używa się do leczenia rozległych, trudno gojących się ran. Dziś hoduje się nie tylko różne tkanki, ale też całe narządy, między innymi <b>naczynia krwionośne, pęcherz moczowy i tchawicę</b>.</p>
+  </article>
+
+  <div class="most" id="l2-most">
+    <h3>To najważniejsze!</h3>
+    <ul>
+      <li><span class="nab"><b>Tkanka nabłonkowa</b></span> jest zbudowana z komórek, które ściśle do siebie przylegają i tworzą od jednej do kilkunastu warstw.</li>
+      <li>Zadania tkanki nabłonkowej to: <b>ochrona</b> ciała przed uszkodzeniami, <b>wytwarzanie i wydzielanie</b> oraz <b>wchłanianie</b> różnych substancji.</li>
+      <li><span class="mie"><b>Tkanka mięśniowa</b></span> składa się z elementów, które dzięki zdolności kurczenia się i rozkurczania umożliwiają zwierzętom <b>ruch</b>.</li>
+      <li><span class="ner"><b>Tkanka nerwowa</b></span> umożliwia <b>odbieranie i analizowanie informacji</b> z wnętrza ciała i z otoczenia, a potem odpowiednią reakcję organizmu.</li>
+      <li>Podstawowym składnikiem tkanki nerwowej jest <b>komórka nerwowa (neuron)</b>. Składa się z <b>ciała komórki</b> i dwóch rodzajów wypustek: <b>dendrytów i aksonu</b>.</li>
+    </ul>
+  </div>
+
+  <article class="th c2" id="l2-cw">
+    <h3>Ćwiczenia z podręcznika (z odpowiedziami)</h3>
+    <p><b>1. Wyjaśnij, dlaczego nabłonki jednowarstwowe pełnią zwykle funkcje wydzielnicze, a wielowarstwowe ochronne.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Nabłonek jednowarstwowy jest cienki, więc substancje łatwo przez niego przechodzą: może je wydzielać i wchłaniać. Nabłonek wielowarstwowy jest gruby, więc trudno go uszkodzić i trudno przez niego przeniknąć drobnoustrojom. Dlatego chroni.</div></details>
+    <p><b>2. Podaj, która tkanka mięśniowa: a) nie ma poprzecznego prążkowania, b) pracuje zależnie od woli, c) kurczy się powoli, d) ma rozgałęzione komórki.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>a) gładka, b) poprzecznie prążkowana szkieletowa, c) gładka, d) poprzecznie prążkowana serca.</div></details>
+    <p><b>3. Omów budowę i funkcję komórki nerwowej.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Neuron składa się z ciała komórki z jądrem oraz z wypustek. Krótkie, rozgałęzione dendryty przesyłają impuls do ciała komórki. Długi akson, zwykle otoczony osłonką, przesyła impuls z ciała komórki do innej komórki. Funkcja neuronu to odbieranie i przesyłanie informacji w postaci impulsów nerwowych.</div></details>
+  </article>
+
+  <div class="quiz" id="q2"></div>
+</section>
+
+<!-- =================================================================== TEMAT 3 -->
+<section class="tab" id="t3" data-name="3. Tkanka łączna">
+  <h2>3. Tkanka łączna</h2>
+  <div class="attn"><b>Zwróć uwagę na:</b> rodzaje i miejsca występowania tkanki łącznej · właściwości i funkcje tkanki kostnej, chrzęstnej i tłuszczowej · składniki krwi i ich znaczenie.</div>
+
+  <article class="th c3" id="l3-budowa">
+    <h3>Jak jest zbudowana tkanka łączna?</h3>
+    <p>Tkanka łączna występuje <b>niemal w każdym narządzie</b> zwierząt, a także <b>pomiędzy narządami</b>. Jej głównym zadaniem jest <b>utrzymywanie łączności między różnymi tkankami</b>.</p>
+    <p>Tkanka łączna składa się z <b>komórek</b> oraz <b>substancji międzykomórkowej</b>. To jej charakterystyczna cecha.</p>
+    <ul>
+      <li>Komórki są <b>luźno rozrzucone</b> w substancji międzykomórkowej, której zwykle jest <b>dużo</b>.</li>
+      <li>W substancji międzykomórkowej niektórych rodzajów tkanki łącznej są <b>mikroskopijne włókna białkowe</b>. Jeśli jest ich bardzo dużo, tkanka jest wyjątkowo <b>odporna na uszkodzenia</b>.</li>
+    </ul>
+    <div class="fact">w substancji międzykomórkowej najczęściej występują włókna z białka zwanego <b>kolagenem</b>. Są tak wytrzymałe na rozciąganie jak stal.</div>
+    <div class="trick">nabłonek to komórki ciasno jak cegły w murze. Tkanka łączna to komórki luźno jak rodzynki w cieście, a „ciasto” to substancja międzykomórkowa.</div>
+  </article>
+
+  <article class="th c3" id="l3-rodzaje">
+    <h3>Rodzaje tkanki łącznej</h3>
+    <p>Jest kilka rodzajów tkanki łącznej, między innymi: <b>tkanka chrzęstna, tkanka kostna, tkanka tłuszczowa i krew</b>. Wchodzą w skład różnych układów narządów kręgowców. Tkanka kostna i chrzęstna budują <b>układ szkieletowy</b>, a krew wypełnia <b>układ krwionośny</b>.</p>
+    <div class="cards">
+      <div class="gcard" style="border-color:#6C7BD0"><b style="color:#4C5BB8">chrzęstna</b><p>Buduje szkielet kręgowców, a także <b>małżowiny uszne</b> ssaków.</p></div>
+      <div class="gcard" style="border-color:#B98A4A"><b style="color:#8A6020">kostna</b><p>Główny składnik <b>kości</b>, czyli elementów szkieletu kręgowców.</p></div>
+      <div class="gcard" style="border-color:#E0B400"><b style="color:#9A7400">tłuszczowa</b><p>Występuje <b>pod skórą</b> i <b>wokół narządów wewnętrznych</b>.</p></div>
+      <div class="gcard" style="border-color:var(--mie)"><b class="mie">krew</b><p>Wypełnia narządy układu krwionośnego: <b>naczynia krwionośne i serce</b>.</p></div>
+    </div>
+  </article>
+
+  <article class="th c3" id="l3-chrzestna">
+    <h3>Tkanka chrzęstna</h3>
+    <ul>
+      <li>Jej głównym składnikiem jest <b>substancja międzykomórkowa</b>, bogata we <b>włókna białkowe</b>.</li>
+      <li>W tej substancji są <b>jamki</b>, w których leżą <b>komórki chrzęstne</b>.</li>
+      <li>Dzięki dużej ilości włókien białkowych jest bardzo <b>elastyczna i sprężysta</b>.</li>
+    </ul>
+    <p><b>Gdzie występuje?</b></p>
+    <ul>
+      <li><b>Łączy niektóre kości</b>, na przykład <b>żebra z mostkiem</b>.</li>
+      <li>W <b>stawach</b> okrywa powierzchnie kości i chroni je przed <b>ścieraniem</b>.</li>
+      <li>Buduje <b>małżowiny uszne</b> ssaków.</li>
+    </ul>
+    <div class="think">dlaczego żebra łączą się z mostkiem tkanką chrzęstną, a nie kostną?
+      <details class="ans"><summary>Pokaż odpowiedź</summary><div>Tkanka chrzęstna jest elastyczna i sprężysta, więc klatka piersiowa może się lekko rozszerzać i zwężać przy oddychaniu. Twarda kość by na to nie pozwoliła.</div></details></div>
+  </article>
+
+  <article class="th c3" id="l3-kostna">
+    <h3>Tkanka kostna</h3>
+    <ul>
+      <li>Zbudowana z dużej ilości <b>substancji międzykomórkowej</b> oraz z <b>komórek kostnych</b>, które leżą w <b>jamkach</b>.</li>
+      <li>Substancja międzykomórkowa jest bogata w <b>sole mineralne</b> i zawiera <b>włókna białkowe</b>.</li>
+      <li>Dzięki <b>solom mineralnym</b> tkanka kostna jest <b>twarda</b>, a dzięki <b>włóknom białkowym</b> jest też <b>elastyczna</b>.</li>
+      <li>Buduje <b>szkielet większości kręgowców</b> i jest głównym składnikiem kości.</li>
+      <li>Jest dla organizmu <b>magazynem soli mineralnych</b>, głównie <b>wapnia</b>.</li>
+      <li>W kości są też <b>naczynia krwionośne</b> i <b>nerwy</b>.</li>
+    </ul>
+    <h4>Porównanie tkanek, które tworzą szkielet kręgowców</h4>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>tkanka chrzęstna</th><th>tkanka kostna</th></tr></thead>
+      <tbody>
+        <tr><th>komórki</th><td>komórki chrzęstne w jamkach</td><td>komórki kostne w jamkach</td></tr>
+        <tr><th>substancja międzykomórkowa</th><td>bogata we <b>włókna białkowe</b></td><td>bogata w <b>sole mineralne</b>, zawiera też włókna białkowe</td></tr>
+        <tr><th>właściwości</th><td><b>elastyczna i sprężysta</b></td><td><b>twarda</b> i elastyczna</td></tr>
+        <tr><th>gdzie?</th><td>połączenie żeber z mostkiem, stawy, małżowiny uszne</td><td>kości, szkielet większości kręgowców</td></tr>
+        <tr><th>dodatkowo</th><td>chroni kości w stawach przed ścieraniem</td><td>magazyn soli mineralnych, głównie wapnia</td></tr>
+      </tbody></table></div>
+  </article>
+
+  <article class="th c3" id="l3-tluszcz">
+    <h3>Tkanka tłuszczowa</h3>
+    <ul>
+      <li>Zawiera <b>bardzo mało substancji międzykomórkowej</b>.</li>
+      <li>Składa się głównie z <b>komórek</b>, które są niemal całe wypełnione <b>dużą kroplą tłuszczu</b>.</li>
+      <li>Występuje przede wszystkim <b>pod skórą</b> i <b>wokół narządów wewnętrznych</b>.</li>
+      <li><b>Chroni</b> organizm przed <b>urazami</b> i zabezpiecza go przed <b>utratą ciepła</b>.</li>
+      <li>Tłuszcz zgromadzony w jej komórkach to <b>materiał zapasowy</b>, który organizm może zużyć do <b>produkcji energii</b>.</li>
+    </ul>
+    <div class="think">co to znaczy, że tkanka tłuszczowa jest rezerwą energetyczną organizmu?
+      <details class="ans"><summary>Pokaż odpowiedź</summary><div>Tłuszcz w jej komórkach to zapas. Gdy organizm ma za mało pokarmu albo potrzebuje więcej energii, zużywa ten tłuszcz do wytwarzania energii.</div></details></div>
+  </article>
+
+  <article class="th c3" id="l3-krew" style="border-left-color:var(--mie)">
+    <h3>Krew</h3>
+    <p>Krew to <b>tkanka płynna</b>. Tak jak inne tkanki łączne składa się z <b>substancji międzykomórkowej</b> i z <b>komórek</b>. Substancja międzykomórkowa ma postać płynu o słomkowym kolorze i nazywa się <b>osocze krwi</b>. W osoczu są zanurzone <b>krwinki czerwone</b>, <b>krwinki białe</b> i <b>płytki krwi</b>.</p>
+    <p><b>Zadania krwi:</b></p>
+    <ol class="num3">
+      <li><b>transportuje</b> w organizmie różne substancje, w tym <b>tlen i dwutlenek węgla</b>,</li>
+      <li><b>chroni</b> organizm przed <b>drobnoustrojami chorobotwórczymi</b>,</li>
+      <li>u <b>ptaków i ssaków</b> pomaga utrzymywać <b>stałą temperaturę ciała</b>.</li>
+    </ol>
+    <p class="noprint"><b>Kliknij część probówki</b>, żeby zobaczyć, z czego składa się krew.</p>
+    <div class="fig">
+      <svg id="tubeSvg" viewBox="0 0 260 360" style="max-width:240px;margin:0 auto" role="img" aria-label="Probówka z krwią">
+        <defs><clipPath id="tubeClip"><path d="M95 30 H165 V300 A35 35 0 0 1 95 300 Z"/></clipPath></defs>
+        <g clip-path="url(#tubeClip)">
+          <rect class="part" data-p="osocze" x="95" y="70" width="70" height="135" fill="#F3C64B"/>
+          <rect class="part" data-p="biale" x="95" y="205" width="70" height="12" fill="#F4F1E6"/>
+          <rect class="part" data-p="czerwone" x="95" y="217" width="70" height="125" fill="#C73A2E"/>
+        </g>
+        <path d="M95 30 H165 V300 A35 35 0 0 1 95 300 Z" fill="none" stroke="#7A8699" stroke-width="4"/>
+        <path d="M88 30 H172" stroke="#7A8699" stroke-width="6" stroke-linecap="round"/>
+        <g class="lbls" id="tubeLbls">
+          <text class="lbl" x="172" y="140">osocze</text>
+          <text class="lbl" x="172" y="160" style="font-size:12px;fill:#6B7280">ponad połowa</text>
+          <text class="lbl" x="172" y="214" style="font-size:12px">białe + płytki</text>
+          <text class="lbl" x="172" y="280">krwinki</text>
+          <text class="lbl" x="172" y="298">czerwone</text>
+        </g>
+      </svg>
+      <div class="info" id="tubeInfo" aria-live="polite"><b>Kliknij część probówki</b><br>Tak wygląda krew po odstaniu: na górze jest osocze, a na dole opadają krwinki.</div>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Składnik krwi</th><th>Budowa / cechy</th><th>Znaczenie</th></tr></thead>
+      <tbody>
+        <tr><th>osocze</th><td>główny składnik krwi, stanowi <b>ponad połowę</b> jej objętości. Składa się w <b>90% z wody</b>, a poza tym są w nim sole mineralne, białka, cukry i tłuszcze</td><td>w nim są zanurzone krwinki i płytki, przenosi rozpuszczone substancje</td></tr>
+        <tr><th>krwinki czerwone (erytrocyty)</th><td>zawierają <b>hemoglobinę</b>, czyli czerwony barwnik</td><td>umożliwiają <b>transport tlenu i dwutlenku węgla</b></td></tr>
+        <tr><th>krwinki białe (leukocyty)</th><td>komórki krwi</td><td>uczestniczą w <b>unieszkodliwianiu wirusów i bakterii</b>, które dostały się do organizmu</td></tr>
+        <tr><th>płytki krwi</th><td>fragmenty cytoplazmy otoczone błoną komórkową</td><td>odpowiadają za <b>krzepnięcie krwi</b></td></tr>
+      </tbody></table></div>
+    <div class="trick"><b>E</b>rytrocyty są czerwone i <b>E</b>kspresowo wożą tlen. <b>L</b>eukocyty są białe i <b>L</b>ikwidują zarazki. <b>P</b>łytki <b>P</b>łatają rany, bo krew krzepnie.</div>
+  </article>
+
+  <div class="game" id="gLac"></div>
+  <div class="game" id="gKrew"></div>
+
+  <article class="th c3" id="l3-mikro">
+    <h3>Obserwacja tkanek łącznych pod mikroskopem</h3>
+    <p>Potrzebujesz mikroskopu i preparatów trwałych, na przykład tkanki chrzęstnej, tkanki kostnej i krwi ssaka. Każdy preparat oglądaj od najmniejszego powiększenia, a potem je zwiększaj. Narysuj tkanki i podpisz rozpoznane elementy: komórki, jamki, substancję międzykomórkową, krwinki.</p>
+  </article>
+
+  <div class="most" id="l3-most">
+    <h3>To najważniejsze!</h3>
+    <ul>
+      <li><b>Tkanka łączna</b> jest zbudowana z luźno ułożonych komórek oraz substancji międzykomórkowej, która może zawierać włókna białkowe.</li>
+      <li>Jest kilka rodzajów tkanki łącznej, między innymi tkanka chrzęstna, tkanka kostna, tkanka tłuszczowa i krew.</li>
+      <li><b>Tkanka chrzęstna</b> jest bardzo elastyczna i sprężysta. Występuje między innymi w stawach, gdzie pokrywa powierzchnie kości i chroni je przed ścieraniem.</li>
+      <li><b>Tkanka kostna</b> jest twarda i elastyczna. Jest głównym składnikiem kości.</li>
+      <li><b>Tkanka tłuszczowa</b> występuje pod skórą i wokół narządów wewnętrznych. Chroni ciało przed urazami i utratą ciepła, a tłuszcz w jej komórkach to materiał zapasowy organizmu.</li>
+      <li><b>Krew</b> jest tkanką płynną. Transportuje różne substancje, chroni organizm przed drobnoustrojami chorobotwórczymi, a ptakom i ssakom umożliwia utrzymywanie stałej temperatury ciała.</li>
+    </ul>
+  </div>
+
+  <article class="th c3" id="l3-cw">
+    <h3>Ćwiczenia z podręcznika (z odpowiedziami)</h3>
+    <p><b>1. Porównaj budowę i właściwości tkanek tworzących szkielet kręgowców.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Obie tkanki, chrzęstna i kostna, to tkanki łączne. Obie mają komórki w jamkach i dużo substancji międzykomórkowej. W chrzęstnej substancja jest bogata we włókna białkowe, dlatego ta tkanka jest elastyczna i sprężysta. W kostnej substancja jest bogata w sole mineralne i zawiera też włókna białkowe, dlatego ta tkanka jest twarda i elastyczna. Kostna jest też magazynem wapnia. Pełne porównanie jest w tabeli w części „Tkanka kostna”.</div></details>
+    <p><b>2. Wyjaśnij, co to znaczy, że tkanka tłuszczowa jest rezerwą energetyczną organizmu.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Tłuszcz w jej komórkach to zapas, który organizm może zużyć do wytwarzania energii, kiedy jej potrzebuje, na przykład gdy brakuje pokarmu.</div></details>
+    <p><b>3. Wykonaj tabelę z najważniejszymi informacjami o budowie i funkcjach składników krwi.</b></p>
+    <details class="ans"><summary>Pokaż odpowiedź</summary><div>Gotowa tabela jest w części „Krew”: osocze, krwinki czerwone, krwinki białe i płytki krwi.</div></details>
+  </article>
+
+  <div class="quiz" id="q3"></div>
+</section>
+
+<!-- =================================================================== PODSUMOWANIE -->
+<section class="tab" id="t4" data-name="Podsumowanie i fiszki">
+  <h2>Podsumowanie działu</h2>
+  <article class="th c4" id="s-cechy">
+    <h3>1. Wspólne cechy zwierząt</h3>
+    <ul>
+      <li>są organizmami <b>wielokomórkowymi</b>,</li>
+      <li>są zbudowane z <b>komórek jądrowych</b>, które nie mają ściany komórkowej i chloroplastów,</li>
+      <li>są organizmami <b>cudzożywnymi</b>.</li>
+    </ul>
+  </article>
+  <article class="th c4" id="s-poziomy">
+    <h3>2. Poziomy organizacji ciała zwierząt</h3>
+    <div class="chain">
+      <div class="lv lv1"><b>komórka</b></div><div class="ar">→</div><div class="lv lv2"><b>tkanka</b></div><div class="ar">→</div>
+      <div class="lv lv3"><b>narząd</b></div><div class="ar">→</div><div class="lv lv4"><b>układ narządów</b></div><div class="ar">→</div><div class="lv lv5"><b>organizm</b></div>
+    </div>
+  </article>
+  <article class="th c4" id="s-podzial">
+    <h3>3. Podział zwierząt ze względu na szkielet</h3>
+    <div class="tree"><div class="root">ZWIERZĘTA</div>
+      <div class="kids">
+        <div class="kid"><b>Kręgowe</b>mają sztywny <b>szkielet wewnętrzny</b>,<br>którego głównymi częściami są kręgosłup i czaszka</div>
+        <div class="kid"><b>Bezkręgowe</b>nie mają sztywnego szkieletu wewnętrznego.<br>Ich ciała są miękkie, u niektórych okryte <b>szkieletem zewnętrznym</b>, czyli pancerzem lub muszlą</div>
+      </div></div>
+  </article>
+  <article class="th c4" id="s-tkanki">
+    <h3>4. Podział tkanek zwierzęcych</h3>
+    <div class="tree"><div class="root">TKANKI ZWIERZĘCE</div>
+      <div class="kids">
+        <div class="kid" style="border-color:var(--nab)"><b class="nab">nabłonkowa</b>jednowarstwowa / wielowarstwowa<br>płaska, sześcienna, walcowata</div>
+        <div class="kid" style="border-color:var(--mie)"><b class="mie">mięśniowa</b>gładka<br>poprzecznie prążkowana serca<br>poprzecznie prążkowana szkieletowa</div>
+        <div class="kid" style="border-color:var(--ner)"><b class="ner">nerwowa</b>komórki nerwowe (neurony)<br>komórki glejowe</div>
+        <div class="kid" style="border-color:var(--lac)"><b class="lac">łączna</b>chrzęstna, kostna,<br>tłuszczowa, krew</div>
+      </div></div>
+  </article>
+
+  <div class="game" id="gTkanki"></div>
+
+  <h2 style="margin-top:30px">Fiszki</h2>
+  <p>Kliknij fiszkę, żeby ją odwrócić. Najpierw spróbuj sama powiedzieć, co znaczy dane pojęcie.</p>
+  <div class="fbar">
+    <button class="btn sm" type="button" id="fShuffle">Potasuj</button>
+    <button class="btn ghost sm" type="button" data-ff="all" aria-pressed="true">Wszystkie</button>
+    <button class="btn ghost sm" type="button" data-ff="1">Temat 1</button>
+    <button class="btn ghost sm" type="button" data-ff="2">Temat 2</button>
+    <button class="btn ghost sm" type="button" data-ff="3">Temat 3</button>
+    <button class="btn ghost sm" type="button" id="fRev">Odwróć: najpierw definicja</button>
+  </div>
+  <div class="fgrid" id="fgrid"></div>
+</section>
+
+<!-- =================================================================== TEST -->
+<section class="tab" id="t5" data-name="Test końcowy">
+  <h2>Test końcowy</h2>
+  <p>20 losowych pytań z całego działu. Przy złej odpowiedzi kliknij „Wróć do teorii”, a potem wróć do testu. Za każdym razem test jest trochę inny.</p>
+  <div class="quiz" id="qAll"></div>
+</section>
+
+<footer>Na podstawie podręcznika do biologii, rozdział „Świat zwierząt”, tematy 1–3.</footer>
+</main>
+
+<script>
+/* ---------- pomocnicze ---------- */
+const $ = s => document.querySelector(s);
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const store = {
+  get() { try { return JSON.parse(localStorage.getItem("bio-swiat-zwierzat") || "{}"); } catch (e) { return {}; } },
+  set(v) { try { localStorage.setItem("bio-swiat-zwierzat", JSON.stringify(v)); } catch (e) {} },
+};
+let prog = store.get();
+
+/* ---------- zakładki ---------- */
+const tabs = [...document.querySelectorAll(".tab")];
+function renderMenu() {
+  $("#menu").innerHTML = tabs.map(t => {
+    const q = { t1: "q1", t2: "q2", t3: "q3", t5: "qAll" }[t.id];
+    const star = q && prog[q] >= 0.8 ? '<span class="st">★</span>' : "";
+    return `<button type="button" data-t="${t.id}" aria-current="${t.classList.contains("on")}">${t.dataset.name}${star}</button>`;
+  }).join("");
+  document.querySelectorAll("#menu button").forEach(b => b.onclick = () => { showTab(b.dataset.t); scrollTo(0, 0); });
+}
+function showTab(id) {
+  tabs.forEach(t => t.classList.toggle("on", t.id === id));
+  renderMenu();
+  try { history.replaceState(null, "", "#" + id); } catch (e) {}
+}
+function goTo(ref) {
+  const el = document.getElementById(ref); if (!el) return;
+  const tab = el.closest(".tab"); if (tab && !tab.classList.contains("on")) showTab(tab.id);
+  el.scrollIntoView({ block: "start" });
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+}
+
+/* ---------- czytanie na głos ---------- */
+let speakingBtn = null;
+function speakText(text, btn) {
+  if (!("speechSynthesis" in window)) { alert("Ta przeglądarka nie umie czytać na głos."); return; }
+  if (speakingBtn === btn) { speechSynthesis.cancel(); btn.classList.remove("on"); btn.textContent = "🔊 Przeczytaj"; speakingBtn = null; return; }
+  speechSynthesis.cancel();
+  if (speakingBtn) { speakingBtn.classList.remove("on"); speakingBtn.textContent = "🔊 Przeczytaj"; }
+  const u = new SpeechSynthesisUtterance(text.replace(/[→]/g, ", potem ").replace(/%/g, " procent").replace(/✓/g, "tak").replace(/✗/g, "nie"));
+  u.lang = "pl-PL"; u.rate = .95;
+  const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith("pl")); if (v) u.voice = v;
+  u.onend = () => { btn.classList.remove("on"); btn.textContent = "🔊 Przeczytaj"; speakingBtn = null; };
+  speakingBtn = btn; btn.classList.add("on"); btn.textContent = "⏹ Zatrzymaj";
+  speechSynthesis.speak(u);
+}
+document.querySelectorAll(".th, .most").forEach(th => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "spk"; b.textContent = "🔊 Przeczytaj";
+  b.onclick = () => {
+    const c = th.cloneNode(true);
+    c.querySelectorAll(".spk, .noprint, .findbar, svg, details, .msg, .findq").forEach(x => x.remove());
+    speakText(c.innerText, b);
+  };
+  th.prepend(b);
+});
+
+/* ---------- rysunek: klikalne części + gra „znajdź” ---------- */
+function diagram({ svg, info, parts, findBtn, lblBtn, lbls, q, msg, findName }) {
+  const all = [...svg.querySelectorAll(".part")];
+  let target = null, order = [], score = 0;
+  const show = p => {
+    all.forEach(x => x.classList.toggle("sel", x.dataset.p === p));
+    info.innerHTML = `<b>${parts[p].n}</b><br>${parts[p].d}`;
+  };
+  all.forEach(el => el.addEventListener("click", e => {
+    e.stopPropagation();
+    const p = el.dataset.p;
+    if (!target) { show(p); return; }
+    if (p === target) {
+      score++; show(p);
+      msg.className = "msg ok"; msg.textContent = `Brawo! To ${parts[p].n.toLowerCase()}.`;
+      nextFind();
+    } else {
+      msg.className = "msg no"; msg.textContent = `To nie to. Kliknęłaś: ${parts[p].n.toLowerCase()}. Szukaj dalej.`;
+    }
+  }));
+  function nextFind() {
+    if (!order.length) {
+      target = null; q.textContent = "";
+      msg.className = "msg ok"; msg.textContent += ` Koniec gry, znalazłaś wszystko! ⭐`;
+      lbls.classList.remove("off"); lblBtn.textContent = "Ukryj podpisy";
+      return;
+    }
+    target = order.pop();
+    q.textContent = `Kliknij: ${parts[target].n.toLowerCase()}`;
+  }
+  findBtn.onclick = () => {
+    order = shuffle(Object.keys(parts)); score = 0;
+    lbls.classList.add("off"); lblBtn.textContent = "Pokaż podpisy";
+    msg.className = "msg"; msg.textContent = "";
+    nextFind();
+  };
+  lblBtn.onclick = () => { lbls.classList.toggle("off"); lblBtn.textContent = lbls.classList.contains("off") ? "Pokaż podpisy" : "Ukryj podpisy"; };
+}
+
+diagram({
+  svg: $("#cellSvg"), info: $("#cellInfo"), findBtn: $("#cellFind"), lblBtn: $("#cellLblBtn"), lbls: $("#cellLbls"), q: $("#cellQ"), msg: $("#cellMsg"),
+  parts: {
+    blona: { n: "Błona komórkowa", d: "Najbardziej zewnętrzna część komórki zwierzęcej. Otacza całą komórkę. (Komórka zwierzęca nie ma ściany komórkowej, ma tylko błonę.)" },
+    cytozol: { n: "Cytozol", d: "Galaretowata substancja, która wypełnia komórkę. Cytozol razem z mitochondriami, rybosomami i wakuolami tworzy cytoplazmę." },
+    jadro: { n: "Jądro komórkowe", d: "Duże, najczęściej kuliste. Wszystkie komórki zwierząt mają jądro komórkowe. Kieruje życiem komórki." },
+    mito: { n: "Mitochondrium", d: "Składnik cytoplazmy. W mitochondriach powstaje energia potrzebna komórce." },
+    ryb: { n: "Rybosomy", d: "Bardzo drobne składniki cytoplazmy. Wytwarzają białka." },
+    wak: { n: "Wakuola", d: "Pęcherzyk w cytoplazmie, w którym są przechowywane różne substancje. W komórce zwierzęcej wakuole są małe." },
+  },
+});
+
+diagram({
+  svg: $("#neuSvg"), info: $("#neuInfo"), findBtn: $("#neuFind"), lblBtn: $("#neuLblBtn"), lbls: $("#neuLbls"), q: $("#neuQ"), msg: $("#neuMsg"),
+  parts: {
+    dend: { n: "Dendryty", d: "Krótkie, silnie rozgałęzione wypustki. Odbierają sygnał i przesyłają impuls nerwowy DO ciała komórki." },
+    cialo: { n: "Ciało komórki", d: "Zawiera wszystkie elementy komórki zwierzęcej, w tym jądro komórkowe (fioletowe kółko)." },
+    akson: { n: "Akson", d: "Pojedyncza, długa wypustka. Przesyła impuls nerwowy Z ciała komórki do innej komórki, z którą tworzy połączenie." },
+    oslonka: { n: "Osłonka", d: "Otacza akson. Chroni go i zwiększa szybkość przesyłania impulsu nerwowego." },
+    koniec: { n: "Zakończenia aksonu", d: "Akson rozgałęzia się zwykle w końcowej części. Tu impuls przechodzi do następnej komórki." },
+  },
+});
+
+/* animacja impulsu */
+(function () {
+  const path = $("#impPath"), dot = $("#impDot"), msg = $("#neuMsg"), btn = $("#impBtn");
+  const L = path.getTotalLength();
+  const stages = [[0, "1. Dendryty odbierają sygnał…"], [0.17, "2. …i przesyłają impuls do ciała komórki."], [0.27, "3. Impuls biegnie aksonem (osłonka go przyspiesza)…"], [0.86, "4. …i przechodzi do następnej komórki."]];
+  btn.onclick = () => {
+    btn.disabled = true; dot.setAttribute("opacity", "1");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, T = reduce ? 1 : 4200, t0 = performance.now();
+    function step(now) {
+      const k = Math.min(1, (now - t0) / T), pt = path.getPointAtLength(k * L);
+      dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y);
+      let s = stages[0][1]; stages.forEach(([at, t]) => { if (k >= at) s = t; });
+      msg.className = "msg ok"; msg.textContent = s;
+      if (k < 1) requestAnimationFrame(step);
+      else { msg.textContent = "Kierunek impulsu: dendryty → ciało komórki → akson → następna komórka."; btn.disabled = false; setTimeout(() => dot.setAttribute("opacity", "0"), 900); }
+    }
+    requestAnimationFrame(step);
+  };
+})();
+
+/* probówka */
+(function () {
+  const parts = {
+    osocze: { n: "Osocze krwi", d: "Płyn o słomkowym kolorze, czyli substancja międzykomórkowa krwi. Stanowi ponad połowę objętości krwi. Składa się w 90% z wody, a poza tym są w nim sole mineralne, białka, cukry i tłuszcze." },
+    biale: { n: "Krwinki białe (leukocyty) i płytki krwi", d: "Cienka jasna warstwa. Krwinki białe unieszkodliwiają wirusy i bakterie. Płytki krwi to fragmenty cytoplazmy otoczone błoną, które odpowiadają za krzepnięcie krwi." },
+    czerwone: { n: "Krwinki czerwone (erytrocyty)", d: "Zawierają hemoglobinę, czyli czerwony barwnik. Dzięki niej transportują tlen i dwutlenek węgla." },
+  };
+  document.querySelectorAll("#tubeSvg .part").forEach(el => el.addEventListener("click", () => {
+    document.querySelectorAll("#tubeSvg .part").forEach(x => x.classList.toggle("sel", x === el));
+    const p = parts[el.dataset.p]; $("#tubeInfo").innerHTML = `<b>${p.n}</b><br>${p.d}`;
+  }));
+})();
+
+/* ---------- gra: poziomy organizacji ---------- */
+(function () {
+  const LV = [["komórka", "--k1"], ["tkanka", "--k2"], ["narząd", "--k3"], ["układ narządów", "--k4"], ["organizm", "--k5"]];
+  const slots = $("#lvSlots"), chips = $("#lvChips"), msg = $("#lvMsg");
+  let next = 0;
+  function reset() {
+    next = 0; msg.textContent = ""; msg.className = "msg";
+    slots.innerHTML = LV.map((_, i) => `<div class="slot" data-i="${i}">${i + 1}.</div>`).join("");
+    chips.innerHTML = "";
+    shuffle(LV.map((x, i) => [x, i])).forEach(([[name, col], i]) => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = name;
+      b.style.background = `var(${col})`;
+      b.onclick = () => {
+        if (i === next) {
+          const s = slots.children[i]; s.textContent = name; s.style.background = `var(${col})`; s.style.borderStyle = "solid"; s.style.borderColor = `var(${col})`;
+          b.classList.add("used"); next++;
+          msg.className = "msg ok"; msg.textContent = next === LV.length ? "Brawo! Komórka → tkanka → narząd → układ narządów → organizm ⭐" : "Dobrze! Co jest następne?";
+        } else {
+          b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake");
+          msg.className = "msg no"; msg.textContent = `Jeszcze nie. Teraz szukasz poziomu nr ${next + 1}. Pamiętaj: Kasia Tańczy Na Ulicy Ogrodowej.`;
+        }
+      };
+      chips.appendChild(b);
+    });
+  }
+  $("#lvReset").onclick = reset; reset();
+})();
+
+/* ---------- gra: wybierz właściwą odpowiedź (uniwersalna) ---------- */
+function pickGame(el, { title, sub, groups, opts, items }) {
+  el.innerHTML = `<h3>${title}</h3><p class="gsub">${sub}</p><div class="gbar"><div></div></div>
+    <div class="gq"></div><div class="gopts"></div><div class="msg" aria-live="polite"></div>
+    <button class="btn ghost sm" type="button" data-a="again" hidden>Zagraj jeszcze raz</button>`;
+  const gq = el.querySelector(".gq"), go = el.querySelector(".gopts"), msg = el.querySelector(".msg"), bar = el.querySelector(".gbar div"), again = el.querySelector('[data-a="again"]');
+  let list = [], i = 0, first = 0, tried = false;
+  const renderOpts = () => {
+    const mk = o => `<button type="button" data-o="${o}">${o}</button>`;
+    go.innerHTML = groups ? groups.map(g => `<span class="grp">${g.label}</span>` + g.opts.map(mk).join("")).join("") : opts.map(mk).join("");
+    go.querySelectorAll("button").forEach(b => b.onclick = () => answer(b));
+  };
+  function show() {
+    const it = list[i]; tried = false;
+    gq.textContent = it.p; msg.textContent = ""; msg.className = "msg";
+    renderOpts(); bar.style.width = (i / list.length * 100) + "%";
+  }
+  function answer(b) {
+    const it = list[i];
+    if (b.dataset.o === it.a) {
+      if (!tried) first++;
+      b.classList.add("right"); go.querySelectorAll("button").forEach(x => x.disabled = true);
+      msg.className = "msg ok"; msg.textContent = "Dobrze! " + (it.why || "");
+      setTimeout(() => { i++; if (i < list.length) show(); else end(); }, it.why ? 1700 : 800);
+    } else {
+      tried = true; b.classList.add("wrong"); b.disabled = true;
+      msg.className = "msg no"; msg.textContent = "Jeszcze nie. " + (it.hint || "Spróbuj jeszcze raz.");
+    }
+  }
+  function end() {
+    bar.style.width = "100%"; gq.textContent = `Koniec! Za pierwszym razem dobrze: ${first} z ${list.length}` + (first === list.length ? " ⭐" : "");
+    go.innerHTML = ""; msg.className = "msg"; msg.textContent = first < list.length ? "Zagraj jeszcze raz, żeby utrwalić." : ""; again.hidden = false;
+  }
+  again.onclick = () => start();
+  function start() { list = shuffle(items); i = 0; first = 0; again.hidden = true; show(); }
+  start();
+}
+
+const KR = ["ryby", "płazy", "gady", "ptaki", "ssaki"], BK = ["parzydełkowce", "płazińce", "nicienie", "pierścienice", "stawonogi", "mięczaki"];
+const GROUPS = [{ label: "kręgowce", opts: KR }, { label: "bezkręgowce", opts: BK }];
+pickGame($("#gAnimals"), {
+  title: "Do jakiej grupy należy to zwierzę?", sub: "Wybierz grupę. Przy złej odpowiedzi dostaniesz podpowiedź.", groups: GROUPS,
+  items: [
+    { p: "błazenek", a: "ryby", hint: "Ma płetwy i łuski, pływa w morzu." },
+    { p: "kumak", a: "płazy", hint: "Ma cienką, wilgotną, nagą skórę." },
+    { p: "pyton", a: "gady", hint: "Ma grubą, suchą skórę z łuskami." },
+    { p: "sójka", a: "ptaki", hint: "Ma skrzydła i pióra." },
+    { p: "lew", a: "ssaki", hint: "Ma włosy (sierść) i karmi młode mlekiem." },
+    { p: "chełbia (meduza)", a: "parzydełkowce", hint: "Ma komórki z parzącym płynem." },
+    { p: "tasiemiec", a: "płazińce", hint: "Pasożyt o płaskim, wydłużonym ciele." },
+    { p: "glista", a: "nicienie", hint: "Pasożyt o długim, nitkowatym ciele." },
+    { p: "dżdżownica", a: "pierścienice", hint: "Jej ciało składa się z pierścieni (segmentów)." },
+    { p: "pijawka", a: "pierścienice", hint: "Jak dżdżownica: ma ciało z segmentów, niczym nieosłonięte." },
+    { p: "motyl monarcha", a: "stawonogi", hint: "Ma odnóża z odcinków połączonych stawami." },
+    { p: "rak", a: "stawonogi", hint: "Ma pancerz i odnóża ze stawami." },
+    { p: "ślimak wstężyk", a: "mięczaki", hint: "Ma miękkie ciało i muszlę." },
+  ],
+});
+pickGame($("#gFeatures"), {
+  title: "Po czym poznać grupę?", sub: "Przeczytaj cechę i wybierz grupę zwierząt.", groups: GROUPS,
+  items: [
+    { p: "Opływowe ciało, płetwy, skóra wytwarza łuski", a: "ryby" },
+    { p: "Cienka, stale wilgotna, naga skóra", a: "płazy" },
+    { p: "Gruba, sucha skóra z łuskami i tarczkami", a: "gady" },
+    { p: "Kończyny przednie przekształcone w skrzydła, pióra", a: "ptaki" },
+    { p: "Karmią potomstwo mlekiem, mają włosy", a: "ssaki" },
+    { p: "Komórki z parzącym płynem do polowania i obrony", a: "parzydełkowce" },
+    { p: "Głównie pasożyty, ciało wydłużone i silnie spłaszczone", a: "płazińce" },
+    { p: "Na ogół pasożyty, ciało długie, nitkowate, zwężone na końcach", a: "nicienie" },
+    { p: "Ciało podzielone na pierścienie (segmenty)", a: "pierścienice" },
+    { p: "Odnóża zbudowane z odcinków połączonych stawami", a: "stawonogi" },
+    { p: "Delikatne, miękkie ciało, u niektórych muszla", a: "mięczaki" },
+  ],
+});
+pickGame($("#gNab"), {
+  title: "Który to nabłonek?", sub: "Przeczytaj, gdzie występuje albo co robi, i wybierz nabłonek.",
+  opts: ["jednowarstwowy płaski", "jednowarstwowy sześcienny", "jednowarstwowy walcowaty", "wielowarstwowy płaski"],
+  items: [
+    { p: "Buduje ściany pęcherzyków płucnych", a: "jednowarstwowy płaski", hint: "To płuca: nabłonek musi być bardzo cienki." },
+    { p: "Transport tlenu i dwutlenku węgla między pęcherzykiem a krwią", a: "jednowarstwowy płaski", hint: "To dzieje się w płucach." },
+    { p: "Występuje w kanalikach budujących nerki", a: "jednowarstwowy sześcienny", hint: "Nerki: komórki jak kostki do gry." },
+    { p: "Wchłanianie glukozy z moczu do krwi", a: "jednowarstwowy sześcienny", hint: "Mocz powstaje w nerkach." },
+    { p: "Wyściela wnętrze jelita cienkiego", a: "jednowarstwowy walcowaty", hint: "Jelito: wysokie komórki jak walce." },
+    { p: "Transportuje substancje pokarmowe z jelita do krwi i wydziela enzymy trawienne", a: "jednowarstwowy walcowaty", hint: "To dzieje się w jelicie cienkim." },
+    { p: "Tworzy zewnętrzną warstwę skóry", a: "wielowarstwowy płaski", hint: "Skóra musi być gruba, żeby chronić." },
+    { p: "Chroni przed uszkodzeniami i wnikaniem drobnoustrojów", a: "wielowarstwowy płaski", hint: "Chroni ten, który ma wiele warstw." },
+  ],
+});
+pickGame($("#gMie"), {
+  title: "Która tkanka mięśniowa?", sub: "Przeczytaj cechę i wybierz rodzaj tkanki mięśniowej.",
+  opts: ["gładka", "serca", "szkieletowa"],
+  items: [
+    { p: "Buduje ściany żołądka i jelit", a: "gładka" },
+    { p: "Buduje ściany serca", a: "serca" },
+    { p: "Buduje mięśnie kończyn", a: "szkieletowa" },
+    { p: "Komórki wrzecionowate, ostro zakończone", a: "gładka" },
+    { p: "Komórki walcowate, rozgałęzione, tępo zakończone", a: "serca" },
+    { p: "Włókna walcowate, proste, tępo zakończone", a: "szkieletowa" },
+    { p: "Jedno jądro w środkowej części komórki", a: "gładka" },
+    { p: "Jedno lub dwa jądra w środkowej części komórki", a: "serca" },
+    { p: "Liczne jądra przy powierzchni włókna", a: "szkieletowa" },
+    { p: "Kurczy się wolno", a: "gładka" },
+    { p: "Pracuje zależnie od woli", a: "szkieletowa", hint: "Którym mięśniem ruszasz, kiedy chcesz?" },
+    { p: "Nie ma poprzecznego prążkowania", a: "gładka" },
+    { p: "Kurczy się szybko i pracuje niezależnie od woli", a: "serca", hint: "Bije cały czas, nawet kiedy śpisz." },
+  ],
+});
+pickGame($("#gLac"), {
+  title: "Która tkanka łączna?", sub: "Przeczytaj cechę i wybierz tkankę.",
+  opts: ["chrzęstna", "kostna", "tłuszczowa", "krew"],
+  items: [
+    { p: "Bardzo elastyczna i sprężysta", a: "chrzęstna" },
+    { p: "Łączy żebra z mostkiem", a: "chrzęstna" },
+    { p: "W stawach okrywa powierzchnie kości", a: "chrzęstna" },
+    { p: "Buduje małżowiny uszne ssaków", a: "chrzęstna" },
+    { p: "Twarda dzięki solom mineralnym", a: "kostna" },
+    { p: "Magazyn soli mineralnych, głównie wapnia", a: "kostna" },
+    { p: "Główny składnik kości", a: "kostna" },
+    { p: "Komórki wypełnione dużą kroplą tłuszczu", a: "tłuszczowa" },
+    { p: "Bardzo mało substancji międzykomórkowej", a: "tłuszczowa" },
+    { p: "Chroni przed utratą ciepła i urazami", a: "tłuszczowa" },
+    { p: "Materiał zapasowy do produkcji energii", a: "tłuszczowa" },
+    { p: "Tkanka płynna", a: "krew" },
+    { p: "Jej substancja międzykomórkowa to osocze", a: "krew" },
+    { p: "Transportuje tlen i dwutlenek węgla", a: "krew" },
+  ],
+});
+pickGame($("#gKrew"), {
+  title: "Składniki krwi", sub: "Przeczytaj opis i wybierz składnik krwi.",
+  opts: ["osocze", "krwinki czerwone", "krwinki białe", "płytki krwi"],
+  items: [
+    { p: "Składa się w 90% z wody", a: "osocze" },
+    { p: "Stanowi ponad połowę objętości krwi", a: "osocze" },
+    { p: "Płyn o słomkowym kolorze", a: "osocze" },
+    { p: "Zawiera sole mineralne, białka, cukry i tłuszcze", a: "osocze" },
+    { p: "Zawierają hemoglobinę, czerwony barwnik", a: "krwinki czerwone" },
+    { p: "Erytrocyty", a: "krwinki czerwone" },
+    { p: "Transportują tlen i dwutlenek węgla", a: "krwinki czerwone" },
+    { p: "Leukocyty", a: "krwinki białe" },
+    { p: "Unieszkodliwiają wirusy i bakterie", a: "krwinki białe" },
+    { p: "Odpowiadają za krzepnięcie krwi", a: "płytki krwi" },
+    { p: "Fragmenty cytoplazmy otoczone błoną komórkową", a: "płytki krwi" },
+  ],
+});
+pickGame($("#gTkanki"), {
+  title: "Rozpoznaj tkankę: powtórka z całego działu", sub: "Która z czterech tkanek pasuje do opisu?",
+  opts: ["nabłonkowa", "mięśniowa", "nerwowa", "łączna"],
+  items: [
+    { p: "Komórki ściśle do siebie przylegają", a: "nabłonkowa" },
+    { p: "Komórki luźno rozrzucone w substancji międzykomórkowej", a: "łączna" },
+    { p: "Potrafi się kurczyć i rozkurczać", a: "mięśniowa" },
+    { p: "Odbiera i przesyła informacje w postaci impulsów", a: "nerwowa" },
+    { p: "Tworzy zewnętrzną warstwę skóry", a: "nabłonkowa" },
+    { p: "Należą do niej krew i tkanka kostna", a: "łączna" },
+    { p: "Buduje mózgowie", a: "nerwowa" },
+    { p: "Buduje ściany żołądka, jelit i serca", a: "mięśniowa" },
+    { p: "Zbudowana z neuronów i komórek glejowych", a: "nerwowa" },
+    { p: "Wyściela wnętrze jelita cienkiego", a: "nabłonkowa" },
+    { p: "Utrzymuje łączność między różnymi tkankami", a: "łączna" },
+    { p: "Umożliwia zwierzętom ruch", a: "mięśniowa" },
+  ],
+});
+
+/* ---------- quizy ---------- */
+const Q = {
+  q1: [
+    { q: "Zwierzęta są organizmami:", o: ["jednokomórkowymi i samożywnymi", "wielokomórkowymi i cudzożywnymi", "wielokomórkowymi i samożywnymi"], a: 1, w: "Wszystkie zwierzęta są wielokomórkowe i cudzożywne.", r: "l1-cechy" },
+    { q: "Czego NIE ma komórka zwierzęca?", o: ["jądra komórkowego", "chloroplastów i ściany komórkowej", "błony komórkowej"], a: 1, w: "Komórka zwierzęca ma jądro i błonę, ale nie ma chloroplastów ani ściany komórkowej.", r: "l1-cechy" },
+    { q: "Dlaczego zwierzęta są cudzożywne?", o: ["bo nie mają chloroplastów i nie wytwarzają same pokarmu", "bo mają jądro komórkowe", "bo są wielokomórkowe"], a: 0, w: "Bez chloroplastów nie potrafią same wytwarzać pokarmu.", r: "l1-cechy" },
+    { q: "Galaretowata substancja wypełniająca komórkę to:", o: ["cytozol", "wakuola", "błona komórkowa"], a: 0, w: "Cytozol to galaretowata substancja. Razem z mitochondriami, rybosomami i wakuolami tworzy cytoplazmę.", r: "l1-komorka" },
+    { q: "Najbardziej zewnętrzną częścią komórki zwierzęcej jest:", o: ["ściana komórkowa", "błona komórkowa", "jądro"], a: 1, w: "Komórka zwierzęca nie ma ściany. Na zewnątrz jest błona komórkowa.", r: "l1-komorka" },
+    { q: "Cytoplazma to:", o: ["samo jądro", "cytozol i składniki komórki, np. mitochondria, rybosomy, wakuole", "tylko błona komórkowa"], a: 1, w: "Cytoplazma = cytozol + mitochondria, rybosomy, wakuole i inne składniki.", r: "l1-komorka" },
+    { q: "Która kolejność poziomów organizacji jest prawidłowa?", o: ["tkanka → komórka → narząd → układ narządów → organizm", "komórka → tkanka → narząd → układ narządów → organizm", "komórka → narząd → tkanka → organizm → układ narządów"], a: 1, w: "Kasia Tańczy Na Ulicy Ogrodowej: Komórka, Tkanka, Narząd, Układ, Organizm.", r: "l1-poziomy" },
+    { q: "Grupa komórek o podobnej budowie, które wykonują określone zadania, to:", o: ["tkanka", "narząd", "układ narządów"], a: 0, w: "To definicja tkanki.", r: "l1-poziomy" },
+    { q: "Serce to przykład:", o: ["tkanki", "narządu", "układu narządów"], a: 1, w: "Serce jest narządem: buduje je kilka rodzajów tkanek (mięśniowa, nabłonkowa, nerwowa).", r: "l1-poziomy" },
+    { q: "Serce razem z naczyniami krwionośnymi tworzy:", o: ["układ krwionośny", "tkankę mięśniową", "układ nerwowy"], a: 0, w: "Serce + naczynia krwionośne = układ krwionośny.", r: "l1-poziomy" },
+    { q: "Na jakiej podstawie dzielimy zwierzęta na kręgowce i bezkręgowce?", o: ["sposobu odżywiania", "obecności sztywnego szkieletu wewnętrznego", "środowiska życia"], a: 1, w: "Kręgowce mają sztywny szkielet wewnętrzny, bezkręgowce nie.", r: "l1-grupy" },
+    { q: "Najważniejsze części szkieletu kręgowców to:", o: ["czaszka i kręgosłup", "pancerz i muszla", "skrzydła i płetwy"], a: 0, w: "Czaszka i kręgosłup, a kręgosłup składa się z kręgów.", r: "l1-grupy" },
+    { q: "Szkielet wewnętrzny razem z mięśniami tworzy:", o: ["aparat ruchu", "układ krwionośny", "tkankę łączną"], a: 0, w: "Szkielet + mięśnie = aparat ruchu.", r: "l1-grupy" },
+    { q: "Pancerz raka to:", o: ["szkielet wewnętrzny", "szkielet zewnętrzny", "kręgosłup"], a: 1, w: "Pancerz to szkielet zewnętrzny. Chroni miękkie ciało, a przyczepione są do niego mięśnie.", r: "l1-grupy" },
+    { q: "Jaką część gatunków zwierząt stanowią bezkręgowce?", o: ["około 5%", "około połowę", "niemal 95%"], a: 2, w: "Niemal 95% gatunków to bezkręgowce.", r: "l1-krolestwo" },
+    { q: "Najliczniejsza grupa kręgowców to:", o: ["ssaki", "ryby", "ptaki"], a: 1, w: "Najliczniejsze są ryby.", r: "l1-krolestwo" },
+    { q: "Cienką, stale wilgotną, nagą skórę mają:", o: ["gady", "płazy", "ryby"], a: 1, w: "Płazy mają nagą, wilgotną skórę. Gady mają suchą skórę z łuskami.", r: "l1-krolestwo" },
+    { q: "Ciało podzielone na pierścienie (segmenty) mają:", o: ["nicienie", "pierścienice", "płazińce"], a: 1, w: "Pierścienice, na przykład dżdżownica.", r: "l1-krolestwo" },
+    { q: "Odnóża z odcinków połączonych stawami mają:", o: ["mięczaki", "stawonogi", "parzydełkowce"], a: 1, w: "Stawonogi: „stawy w nogach”.", r: "l1-krolestwo" },
+    { q: "Gąbki są wyjątkowe, ponieważ:", o: ["nie mają tkanek, narządów ani układów narządów", "mają kręgosłup", "są samożywne"], a: 0, w: "To jedyne zwierzęta bez tkanek, narządów i układów.", r: "l1-gabki" },
+  ],
+  q2: [
+    { q: "Cztery rodzaje tkanek zwierzęcych to:", o: ["nabłonkowa, mięśniowa, nerwowa, łączna", "nabłonkowa, kostna, krew, skóra", "mięśniowa, tłuszczowa, nerwowa, chrzęstna"], a: 0, w: "Nabłonkowa, mięśniowa, nerwowa i łączna.", r: "l2-rodzaje" },
+    { q: "W tkance nabłonkowej komórki:", o: ["są luźno rozrzucone", "ściśle do siebie przylegają", "tworzą długie włókna"], a: 1, w: "Komórki nabłonka zawsze ściśle do siebie przylegają.", r: "l2-nablonek" },
+    { q: "Która z tych rzeczy NIE jest zadaniem nabłonka?", o: ["ochrona", "wchłanianie", "kurczenie się"], a: 2, w: "Kurczy się tkanka mięśniowa. Nabłonek chroni, wchłania, wytwarza i wydziela.", r: "l2-nablonek" },
+    { q: "Ze względu na kształt komórek nabłonki dzielimy na:", o: ["płaskie, sześcienne, walcowate", "gładkie, prążkowane, rozgałęzione", "jednowarstwowe i wielowarstwowe"], a: 0, w: "Według kształtu: płaskie, sześcienne, walcowate. Według liczby warstw: jedno- i wielowarstwowe.", r: "l2-nablonek" },
+    { q: "Nabłonki wielowarstwowe występują:", o: ["u wszystkich zwierząt", "wyłącznie u kręgowców", "tylko u bezkręgowców"], a: 1, w: "Jednowarstwowe są u wszystkich zwierząt, wielowarstwowe tylko u kręgowców.", r: "l2-nablonek" },
+    { q: "Ściany pęcherzyków płucnych buduje nabłonek:", o: ["jednowarstwowy płaski", "jednowarstwowy walcowaty", "wielowarstwowy płaski"], a: 0, w: "Jednowarstwowy płaski: transport tlenu i dwutlenku węgla.", r: "l2-nablonek" },
+    { q: "Wnętrze jelita cienkiego wyściela nabłonek:", o: ["jednowarstwowy sześcienny", "jednowarstwowy walcowaty", "wielowarstwowy płaski"], a: 1, w: "Jednowarstwowy walcowaty: przenosi pokarm do krwi i wydziela enzymy.", r: "l2-nablonek" },
+    { q: "Zewnętrzną warstwę skóry tworzy nabłonek:", o: ["wielowarstwowy płaski", "jednowarstwowy sześcienny", "jednowarstwowy płaski"], a: 0, w: "Wielowarstwowy płaski chroni przed uszkodzeniami i drobnoustrojami.", r: "l2-nablonek" },
+    { q: "Rzęski w nabłonku dróg oddechowych:", o: ["wydzielają mleko", "usuwają zanieczyszczenia z wdychanego powietrza", "przesyłają impulsy"], a: 1, w: "Rzęski oczyszczają wdychane powietrze.", r: "l2-nablonek" },
+    { q: "Tkanka mięśniowa pracująca zależnie od woli to:", o: ["gładka", "poprzecznie prążkowana serca", "poprzecznie prążkowana szkieletowa"], a: 2, w: "Tylko szkieletowa słucha Twojej woli.", r: "l2-miesnie" },
+    { q: "Która tkanka mięśniowa kurczy się wolno?", o: ["gładka", "serca", "szkieletowa"], a: 0, w: "Gładka kurczy się wolno, a serca i szkieletowa szybko.", r: "l2-miesnie" },
+    { q: "Rozgałęzione komórki ma tkanka mięśniowa:", o: ["gładka", "poprzecznie prążkowana serca", "poprzecznie prążkowana szkieletowa"], a: 1, w: "Komórki tkanki serca są walcowate i rozgałęzione.", r: "l2-miesnie" },
+    { q: "Liczne jądra przy powierzchni włókna ma tkanka mięśniowa:", o: ["gładka", "serca", "szkieletowa"], a: 2, w: "Włókno szkieletowe powstaje z wielu połączonych komórek, dlatego ma wiele jąder.", r: "l2-miesnie" },
+    { q: "Ściany żołądka i jelit buduje tkanka mięśniowa:", o: ["gładka", "serca", "szkieletowa"], a: 0, w: "Narządy wewnętrzne, takie jak żołądek i jelita, mają ściany z tkanki gładkiej.", r: "l2-miesnie" },
+    { q: "Inna nazwa komórki nerwowej to:", o: ["neuron", "erytrocyt", "leukocyt"], a: 0, w: "Komórka nerwowa = neuron.", r: "l2-nerwowa" },
+    { q: "Komórki glejowe:", o: ["przesyłają impulsy nerwowe", "są podporą, chronią i odżywiają komórki nerwowe", "kurczą się i rozkurczają"], a: 1, w: "Glej wypełnia przestrzeń między neuronami, chroni je i odżywia.", r: "l2-nerwowa" },
+    { q: "Dendryty przesyłają impuls nerwowy:", o: ["do ciała komórki", "z ciała komórki do innej komórki", "wcale nie przesyłają impulsów"], a: 0, w: "Dendryty dostarczają impuls DO ciała komórki.", r: "l2-neuron" },
+    { q: "Akson to:", o: ["krótka, silnie rozgałęziona wypustka", "pojedyncza, długa wypustka, która przesyła impuls z ciała komórki", "jądro komórki nerwowej"], a: 1, w: "Akson jest długi i pojedynczy. Przesyła impuls z ciała komórki dalej.", r: "l2-neuron" },
+    { q: "Osłonka aksonu:", o: ["chroni akson i zwiększa szybkość impulsu", "wytwarza enzymy", "zawiera jądro"], a: 0, w: "Osłonka chroni i przyspiesza przesyłanie impulsu.", r: "l2-neuron" },
+    { q: "Impuls nerwowy płynie w kolejności:", o: ["akson → ciało → dendryty", "dendryty → ciało komórki → akson", "ciało → dendryty → akson"], a: 1, w: "Dendryty → ciało komórki → akson → następna komórka.", r: "l2-neuron" },
+  ],
+  q3: [
+    { q: "Tkanka łączna składa się z:", o: ["komórek i substancji międzykomórkowej", "samych ściśle przylegających komórek", "samych włókien mięśniowych"], a: 0, w: "Komórki + substancja międzykomórkowa: to charakterystyczna cecha tkanki łącznej.", r: "l3-budowa" },
+    { q: "Komórki tkanki łącznej są:", o: ["luźno rozrzucone w substancji międzykomórkowej", "ułożone ciasno w warstwach", "połączone w długie włókna"], a: 0, w: "Są luźno rozrzucone, a substancji międzykomórkowej jest zwykle dużo.", r: "l3-budowa" },
+    { q: "Białko, z którego zbudowane są włókna wytrzymałe jak stal, to:", o: ["kolagen", "hemoglobina", "glukoza"], a: 0, w: "Kolagen.", r: "l3-budowa" },
+    { q: "Do tkanki łącznej należą:", o: ["chrzęstna, kostna, tłuszczowa i krew", "nabłonek i neurony", "tylko kości"], a: 0, w: "Chrzęstna, kostna, tłuszczowa i krew.", r: "l3-rodzaje" },
+    { q: "Elastyczna i sprężysta tkanka, która w stawach okrywa kości, to:", o: ["chrzęstna", "kostna", "tłuszczowa"], a: 0, w: "Tkanka chrzęstna chroni kości w stawach przed ścieraniem.", r: "l3-chrzestna" },
+    { q: "Żebra z mostkiem łączy tkanka:", o: ["kostna", "chrzęstna", "nabłonkowa"], a: 1, w: "Tkanka chrzęstna, bo jest elastyczna.", r: "l3-chrzestna" },
+    { q: "Małżowiny uszne ssaków są zbudowane z tkanki:", o: ["chrzęstnej", "kostnej", "tłuszczowej"], a: 0, w: "Z tkanki chrzęstnej, dlatego ucho jest giętkie.", r: "l3-chrzestna" },
+    { q: "Dzięki czemu tkanka kostna jest twarda?", o: ["dzięki solom mineralnym", "dzięki tłuszczowi", "dzięki osoczu"], a: 0, w: "Sole mineralne dają twardość, a włókna białkowe elastyczność.", r: "l3-kostna" },
+    { q: "Tkanka kostna jest magazynem:", o: ["soli mineralnych, głównie wapnia", "tłuszczu", "tlenu"], a: 0, w: "Kość magazynuje sole mineralne, głównie wapń.", r: "l3-kostna" },
+    { q: "Komórki tkanki tłuszczowej są wypełnione:", o: ["dużą kroplą tłuszczu", "hemoglobiną", "solami wapnia"], a: 0, w: "Prawie całą komórkę wypełnia kropla tłuszczu.", r: "l3-tluszcz" },
+    { q: "Tkanka tłuszczowa:", o: ["chroni przed urazami i utratą ciepła, jest zapasem energii", "przesyła impulsy nerwowe", "transportuje tlen"], a: 0, w: "Chroni, ogrzewa i jest zapasem energii.", r: "l3-tluszcz" },
+    { q: "Krew to tkanka:", o: ["płynna", "twarda", "nabłonkowa"], a: 0, w: "Krew to płynna tkanka łączna.", r: "l3-krew" },
+    { q: "Substancja międzykomórkowa krwi to:", o: ["osocze", "hemoglobina", "kolagen"], a: 0, w: "Osocze, płyn o słomkowym kolorze.", r: "l3-krew" },
+    { q: "Osocze składa się w:", o: ["10% z wody", "50% z wody", "90% z wody"], a: 2, w: "Osocze to w 90% woda, a reszta to sole mineralne, białka, cukry i tłuszcze.", r: "l3-krew" },
+    { q: "Osocze stanowi:", o: ["mniej niż połowę objętości krwi", "ponad połowę objętości krwi", "całą krew"], a: 1, w: "Osocze stanowi ponad połowę objętości krwi.", r: "l3-krew" },
+    { q: "Hemoglobinę zawierają:", o: ["krwinki czerwone", "krwinki białe", "płytki krwi"], a: 0, w: "Krwinki czerwone (erytrocyty). Hemoglobina pozwala przenosić tlen.", r: "l3-krew" },
+    { q: "Za krzepnięcie krwi odpowiadają:", o: ["krwinki czerwone", "płytki krwi", "osocze"], a: 1, w: "Płytki krwi.", r: "l3-krew" },
+    { q: "Wirusy i bakterie unieszkodliwiają:", o: ["krwinki białe (leukocyty)", "krwinki czerwone (erytrocyty)", "płytki krwi"], a: 0, w: "Krwinki białe, czyli leukocyty.", r: "l3-krew" },
+    { q: "Krwinki czerwone to inaczej:", o: ["leukocyty", "erytrocyty", "neurony"], a: 1, w: "Erytrocyty = krwinki czerwone, leukocyty = krwinki białe.", r: "l3-krew" },
+    { q: "Utrzymywanie stałej temperatury ciała umożliwia krew u:", o: ["ryb i płazów", "ptaków i ssaków", "wszystkich zwierząt"], a: 1, w: "U ptaków i ssaków.", r: "l3-krew" },
+  ],
+};
+
+function renderQuiz(el, key, questions, opts = {}) {
+  let first = 0, answered = 0;
+  const total = questions.length;
+  el.innerHTML = `<div class="qhead"><h3 style="margin:0">${opts.title || "Quiz"}</h3><span class="score" aria-live="polite"></span></div>
+    <p class="gsub">Kliknij odpowiedź. Jeśli się pomylisz, przeczytaj wyjaśnienie albo kliknij „Wróć do teorii”.</p>
+    <div class="qs"></div>${opts.again ? `<button class="btn" type="button" data-a="again">Nowy test</button>` : ""}`;
+  const sc = el.querySelector(".score");
+  const upd = () => {
+    sc.textContent = `${first} / ${total}` + (answered === total ? (first / total >= 0.8 ? " ⭐ Zdane!" : " (powtórz i spróbuj jeszcze raz)") : "");
+    if (answered === total) { const r = first / total; if (!(prog[key] >= r)) { prog[key] = r; store.set(prog); renderMenu(); } }
+  };
+  questions.forEach((it, qi) => {
+    const d = document.createElement("div"); d.className = "q";
+    const order = shuffle(it.o.map((o, i) => i));
+    d.innerHTML = `<h4>${qi + 1}. ${it.q}</h4><div class="opts">${order.map(i => `<button type="button" data-i="${i}">${it.o[i]}</button>`).join("")}</div><div class="why" aria-live="polite"></div>`;
+    let tried = false;
+    const why = d.querySelector(".why");
+    d.querySelectorAll(".opts button").forEach(b => b.onclick = () => {
+      if (+b.dataset.i === it.a) {
+        b.classList.add("right"); d.querySelectorAll(".opts button").forEach(x => x.disabled = true); d.classList.add("done");
+        why.className = "why r"; why.textContent = "Dobrze! " + it.w;
+        if (!tried) first++; answered++; upd();
+      } else {
+        tried = true; b.classList.add("wrong"); b.disabled = true;
+        why.className = "why w"; why.innerHTML = "Jeszcze nie. " + it.w + (it.r ? ` <a role="button" tabindex="0" data-r="${it.r}">Wróć do teorii →</a>` : "");
+        const a = why.querySelector("a"); if (a) { a.onclick = () => goTo(a.dataset.r); a.onkeydown = e => { if (e.key === "Enter") goTo(a.dataset.r); }; }
+      }
+    });
+    el.querySelector(".qs").appendChild(d);
+  });
+  upd();
+  const ag = el.querySelector('[data-a="again"]'); if (ag) ag.onclick = opts.again;
+}
+renderQuiz($("#q1"), "q1", Q.q1, { title: "Quiz: temat 1" });
+renderQuiz($("#q2"), "q2", Q.q2, { title: "Quiz: temat 2" });
+renderQuiz($("#q3"), "q3", Q.q3, { title: "Quiz: temat 3" });
+function finalTest() {
+  const pool = shuffle([...shuffle(Q.q1).slice(0, 7), ...shuffle(Q.q2).slice(0, 7), ...shuffle(Q.q3).slice(0, 6)]);
+  renderQuiz($("#qAll"), "qAll", pool, { title: "Test: cały dział", again: () => { finalTest(); $("#qAll").scrollIntoView(); } });
+}
+finalTest();
+
+/* ---------- fiszki ---------- */
+const F = [
+  [1, "organizm wielokomórkowy", "Organizm, którego ciało składa się z wielu komórek. Takie są wszystkie zwierzęta."],
+  [1, "organizm cudzożywny", "Nie potrafi sam wytwarzać pokarmu (nie ma chloroplastów), więc musi go zdobywać."],
+  [1, "jądro komórkowe", "Duża, najczęściej kulista część komórki zwierzęcej."],
+  [1, "cytoplazma", "Cytozol + składniki komórki, np. mitochondria, rybosomy, wakuole."],
+  [1, "cytozol", "Galaretowata substancja wypełniająca komórkę."],
+  [1, "błona komórkowa", "Najbardziej zewnętrzna część komórki zwierzęcej."],
+  [1, "czego nie ma komórka zwierzęca?", "Chloroplastów i ściany komórkowej."],
+  [1, "tkanka", "Grupa komórek o podobnej budowie, które wykonują określone zadania."],
+  [1, "narząd", "Zbudowany z różnych tkanek, np. serce."],
+  [1, "układ narządów", "Narządy, które razem wykonują czynności życiowe, np. serce + naczynia = układ krwionośny."],
+  [1, "poziomy organizacji", "Komórka → tkanka → narząd → układ narządów → organizm."],
+  [1, "kręgowce", "Mają sztywny szkielet wewnętrzny (czaszka + kręgosłup). Ryby, płazy, gady, ptaki, ssaki."],
+  [1, "bezkręgowce", "Nie mają sztywnego szkieletu wewnętrznego. To niemal 95% gatunków zwierząt."],
+  [1, "kręgi", "Mniejsze elementy, z których składa się kręgosłup."],
+  [1, "aparat ruchu", "Szkielet wewnętrzny razem z mięśniami."],
+  [1, "szkielet zewnętrzny", "Np. pancerz raka. Chroni miękkie ciało, przyczepione są do niego mięśnie."],
+  [1, "gąbki", "Jedyne zwierzęta bez tkanek, narządów i układów. Potrafią odbudować ciało z małego fragmentu."],
+  [2, "4 rodzaje tkanek", "Nabłonkowa, mięśniowa, nerwowa, łączna."],
+  [2, "nabłonek", "Tkanka z komórek ściśle przylegających. Chroni, wchłania, wytwarza i wydziela."],
+  [2, "nabłonek wielowarstwowy", "Występuje tylko u kręgowców, np. zewnętrzna warstwa skóry. Chroni."],
+  [2, "nabłonek jednowarstwowy płaski", "Ściany pęcherzyków płucnych. Transport tlenu i CO₂."],
+  [2, "nabłonek jednowarstwowy walcowaty", "Wnętrze jelita cienkiego. Wchłania pokarm do krwi, wydziela enzymy."],
+  [2, "tkanka mięśniowa gładka", "Ściany żołądka i jelit. Komórki wrzecionowate, 1 jądro, kurczy się wolno, niezależnie od woli."],
+  [2, "tkanka mięśniowa serca", "Ściany serca. Komórki rozgałęzione, 1–2 jądra, szybko, niezależnie od woli."],
+  [2, "tkanka mięśniowa szkieletowa", "Mięśnie kończyn. Włókna, liczne jądra przy brzegu, szybko, ZALEŻNIE od woli."],
+  [2, "neuron", "Komórka nerwowa. Odbiera i przesyła informacje w postaci impulsu nerwowego."],
+  [2, "dendryty", "Krótkie, rozgałęzione wypustki neuronu. Przesyłają impuls DO ciała komórki."],
+  [2, "akson", "Długa, pojedyncza wypustka. Przesyła impuls Z ciała komórki do innej komórki."],
+  [2, "osłonka", "Otacza akson. Chroni go i przyspiesza impuls."],
+  [2, "komórki glejowe", "Podpora, ochrona i odżywianie komórek nerwowych."],
+  [2, "impuls nerwowy", "Sygnał, który przekazuje informacje w układzie nerwowym."],
+  [3, "tkanka łączna", "Komórki luźno rozrzucone w dużej ilości substancji międzykomórkowej."],
+  [3, "kolagen", "Białko, z którego zbudowane są włókna wytrzymałe na rozciąganie jak stal."],
+  [3, "tkanka chrzęstna", "Elastyczna i sprężysta. Stawy, połączenie żeber z mostkiem, małżowiny uszne."],
+  [3, "tkanka kostna", "Twarda (sole mineralne) i elastyczna (włókna). Kości, magazyn wapnia."],
+  [3, "tkanka tłuszczowa", "Komórki z dużą kroplą tłuszczu. Chroni przed urazami i zimnem, jest zapasem energii."],
+  [3, "krew", "Tkanka płynna: osocze + krwinki czerwone, białe i płytki krwi."],
+  [3, "osocze", "Płyn o słomkowym kolorze, ponad połowa krwi, 90% wody."],
+  [3, "erytrocyty", "Krwinki czerwone. Mają hemoglobinę i przenoszą tlen i CO₂."],
+  [3, "leukocyty", "Krwinki białe. Unieszkodliwiają wirusy i bakterie."],
+  [3, "płytki krwi", "Fragmenty cytoplazmy otoczone błoną. Odpowiadają za krzepnięcie krwi."],
+  [3, "hemoglobina", "Czerwony barwnik w krwinkach czerwonych, który umożliwia transport tlenu."],
+];
+let fFilter = "all", fRev = false, fList = F.slice();
+function drawF() {
+  $("#fgrid").innerHTML = fList.filter(f => fFilter === "all" || String(f[0]) === fFilter).map(f =>
+    `<button type="button" class="fc" aria-label="Fiszka: ${fRev ? "definicja" : f[1]}"><div class="in"><div class="fa">${fRev ? f[2] : f[1]}</div><div class="fb">${fRev ? f[1] : f[2]}</div></div></button>`).join("");
+  if (fRev) document.querySelectorAll(".fc .fa").forEach(x => { x.style.font = "600 15px/1.35 Nunito,sans-serif"; });
+  if (fRev) document.querySelectorAll(".fc .fb").forEach(x => { x.style.font = "700 26px/1.1 Caveat,cursive"; });
+  document.querySelectorAll(".fc").forEach(c => c.onclick = () => c.classList.toggle("flip"));
+}
+$("#fShuffle").onclick = () => { fList = shuffle(F); drawF(); };
+$("#fRev").onclick = () => { fRev = !fRev; $("#fRev").textContent = fRev ? "Odwróć: najpierw pojęcie" : "Odwróć: najpierw definicja"; drawF(); };
+document.querySelectorAll("[data-ff]").forEach(b => b.onclick = () => {
+  fFilter = b.dataset.ff; document.querySelectorAll("[data-ff]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawF();
+});
+drawF();
+
+/* ---------- wydruk: rozwiń odpowiedzi ---------- */
+let openedForPrint = [];
+addEventListener("beforeprint", () => { openedForPrint = [...document.querySelectorAll("details.ans:not([open])")]; openedForPrint.forEach(d => d.open = true); });
+addEventListener("afterprint", () => { openedForPrint.forEach(d => d.open = false); });
+
+/* ---------- start ---------- */
+const startTab = tabs.find(t => "#" + t.id === location.hash);
+showTab(startTab ? startTab.id : "t1");
+</script>
+</body>
+</html>
